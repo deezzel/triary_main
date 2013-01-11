@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">  
+
+    <h:head>  
+
+    </h:head>  
+
+    <h:body>
+        <div id='container'>
+            <div id='header' style=' height:11.6%; background: url(images/main_black_img.jpg); width: 100%;'>
+                <a href="index.xhtml"><img src="images/logo.png" style="left: auto; zoom: 23%"/></a>
+                <div style="margin-left: 80%; margin-top: -6%">
+                    <h:outputLabel style="color: white" value="Добро пожаловать: "/><h:outputLink value="userprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText style="color: white" value="#{userManagedBean.loginUserName}"/></h:outputLink>
+                </div>
+                <div style="margin-left: 80%">
+                    <h:form>
+                        <c:if test="${userManagedBean.currentUser!=null}"> 
+                            <p:commandButton style="font-size: 12px" value="Выйти" action="#{userManagedBean.logout}"/>
+                        </c:if>
+                        <c:if test="${userManagedBean.currentUser==null}"> 
+                            <p:commandButton ajax="false" value="Войти" style="font-size: 12px" action="Login.xhtml?faces-redirect=true" />
+                        </c:if>
+                    </h:form>
+                    <br/>
+                </div>
+            </div>  
+            <div id="log" style="width: 100%; height: 8%; background-image: url(images/yellow.jpg); background-repeat: repeat">
+                <h:form id="search_form">
+                    <p:inputText style="width: 50%; margin-top: 10px; margin-left: 20%"/>
+                    <p:commandButton style="font-size: 12px" value="Поиск" id="search_button"/>
+                </h:form>
+
+            </div>
+            <div id="content" style="background-image: url(images/.png); background-size: 40%; background-repeat: no-repeat; background-position: right; ">
+                <div style="margin-left: 5%; width: 61%; margin-right: auto; position: relative; z-index: 1">
+                    <p:breadCrumb id="menu">
+                        <p:menuitem url="index.xhtml" value="Home"/>
+                        <p:menuitem url="news.xhtml" value="Публикации"/>
+                        <c:if test="${profileMB.curprofile.stat_enabled}">
+                        <p:menuitem>
+                            <h:outputLink value="statistics.xhtml">
+                                <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
+                                <h:outputText style="color: white" value="Статистика"/>
+                            </h:outputLink>
+                        </p:menuitem>
+                        </c:if>
+                        <p:menuitem url="galeria.xhtml" value="Галерея"/>
+                        <c:if test="${profileMB.curprofile.diary_enabled}">
+                        <p:menuitem>
+                            <h:outputLink value="add_diary_rec.xhtml">
+                                <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
+                                <h:outputText style="color: white" value="Дневник"/>
+                            </h:outputLink>
+                        </p:menuitem>
+                        </c:if>
+                    </p:breadCrumb>
+                    <h:form id="form" prependId="false">
+                        <p:panel header=" ПРОФИЛЬ">
+                            <p:fieldset legend="Моя тренировочная программа">   
+                                <p:inplace editor="true" id="ajaxInplace">
+                                    <p:inputTextarea rows="6" cols="33" value="#{profileMB.curprofile.ration}" />
+                                    <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                </p:inplace>
+                            </p:fieldset>  
+
+                            <p:fieldset legend="Моя Диета">  
+                                <p:inplace editor="true" id="ajaxInplace1">
+                                    <p:inputTextarea rows="6" cols="33" value="#{profileMB.curprofile.diet}" />
+                                    <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                </p:inplace>
+                            </p:fieldset>  
+                            <p:fieldset legend="Мои параметры"> 
+
+                                <h:form prependId="false">  
+                                    <p:panelGrid columns="2">                               
+                                        <h:outputLabel for="height" value="Рост: "/>
+                                        <p:inplace editor="true" id="ajaxheight">
+                                            <p:inputText id="height" value="#{profileMB.curprofile.height}"/>
+                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                        </p:inplace>
+                                        <h:outputLabel for="weight" value="Вес: "/>
+                                        <p:inplace editor="true" id="ajaxweight">
+                                            <p:inputText id="weight" value="#{profileMB.curprofile.weight}"/>
+                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                        </p:inplace>
+                                        <h:outputLabel for="waist" value="Талия: "/>
+                                        <p:inplace editor="true" id="ajaxwaist">
+                                            <p:inputText id="waist" value="#{profileMB.curprofile.waist_dimension}"/>
+                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                        </p:inplace>
+                                        <h:outputLabel for="biceps" value="Бицепс: "/>
+                                        <p:inplace editor="true" id="ajaxbiceps">
+                                            <p:inputText id="biceps" value="#{profileMB.curprofile.biceps_dimension}"/>
+                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                        </p:inplace>
+                                        <h:outputLabel for="chest" value="Грудь: "/>
+                                        <p:inplace editor="true" id="ajaxchest">
+                                            <p:inputText id="chest" value="#{profileMB.curprofile.chest_dimension}"/>
+                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                        </p:inplace>
+                                        <h:outputLabel for="forearm" value="Предплечье: "/>
+                                        <p:inplace editor="true" id="ajaxforearm">
+                                            <p:inputText id="forearm" value="#{profileMB.curprofile.forearm_dimension}"/>
+                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                        </p:inplace>
+                                        <h:outputLabel for="wrist" value="Запястье: "/>
+                                        <p:inplace editor="true" id="ajaxwrist">
+                                            <p:inputText id="wrist" value="#{profileMB.curprofile.wrist_dimension}"/>
+                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                        </p:inplace>
+                                        <h:outputLabel for="neck" value="Шея: "/>
+                                        <p:inplace editor="true" id="ajaxneck">
+                                            <p:inputText id="neck" value="#{profileMB.curprofile.neck_dimension}"/>
+                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                        </p:inplace>
+                                        <h:outputLabel for="hip" value="Бедро: "/>
+                                        <p:inplace editor="true" id="ajaxhip">
+                                            <p:inputText id="hip" value="#{profileMB.curprofile.thigh_dimension}"/>
+                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                        </p:inplace>
+                                        <h:outputLabel for="butts" value="Ягодицы: "/>
+                                        <p:inplace editor="true" id="ajaxbutts">
+                                            <p:inputText id="butts" value="#{profileMB.curprofile.butt_dimension}"/>
+                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                        </p:inplace>
+                                        <h:outputLabel for="shin" value="Голень: "/>
+                                        <p:inplace editor="true" id="ajaxshin">
+                                            <p:inputText id="shin" value="#{profileMB.curprofile.shin_dimension}"/>
+                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                        </p:inplace>
+                                    </p:panelGrid>
+                                </h:form>
+                            </p:fieldset> 
+                            <h:panelGrid  style="margin-bottom:10px" cellpadding="5">      
+                            </h:panelGrid>
+                        </p:panel>
+                    </h:form>
+                </div>
+                <div id="about" style="width: 33%; position: absolute; top: 21%; left: 66%; z-index: 1;float: right" >
+
+
+                    <br><p:fieldset legend="Профиль пользователя #{userManagedBean.currentUser.login}">  
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <h:outputLink value="profile_settings.xhtml">
+                                    <f:param name="id_prof" value="#{profileMB.curprofile.id}"/>
+                                    <h:outputText value="Настройки профиля"/>
+                                </h:outputLink>
+                                <h:outputText value=""/>
+
+                                
+                            </h:panelGrid>
+                        </p:fieldset>
+                        <p:fieldset legend="Информация">  
+                            <h:panelGrid columns="2" cellpadding="10">  
+                                <h:outputText value="Имя: " style="font-size: 12px"/>
+                                <h:outputText value="#{userManagedBean.currentUser.name}"/>
+
+                                <h:outputText value="Фамилия: " style="font-size: 12px"/>
+                                <h:outputText value="#{userManagedBean.currentUser.surName}"/>
+
+                                <h:outputText value="Дата регистрации: " style="font-size: 12px"/>
+                                <h:outputText value="#{userManagedBean.normRegDate()}"/>
+
+                                <h:outputText value="Телефон: " style="font-size: 12px"/>
+                                <h:outputText value="#{userManagedBean.currentUser.phone}"/>
+
+                                <h:outputText value="E-mail для связи: " style="font-size: 12px"/>
+                                <h:outputText value="#{userManagedBean.currentUser.email}"/>
+                            </h:panelGrid>  
+                        </p:fieldset> </br>
+                    <p:calendar mode="inline" id="inlineCal"/>
+                </div>
+            </div>
+        </div>
+        <p style="text-align: center">
+            <a href="#">О нас</a>
+            <p:spacer width="10px"/>
+            <a href="#">Пожаловаться</a>
+            <p:spacer width="10px"/>
+            <a href="#">Twitter</a>
+            <p:spacer width="10px"/>
+            <a href="#">Facebook</a>
+        </p> 
+    </h:body>
+
+</html>  
+
