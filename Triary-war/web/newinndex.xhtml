@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+
+<html
+    xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    >
+    <h:head>
+        <title>Triary (homepage)</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <!--5grid--><script src="css/5grid/viewport.js"></script><!--[if lt IE 9]><script src="css/5grid/ie.js"></script><![endif]--><link rel="stylesheet" href="css/5grid/responsive.css" /><!--/5grid-->
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
+        <!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+    </h:head>
+    <h:body>
+
+        <!-- Header -->
+        <div id="header-wrapper">
+            <header id="header" class="5grid">
+                <div class="12u-first">
+
+                    <!-- Logo -->
+                    <h1><a href="newinndex.xhtml">Triary</a></h1>
+
+                    <!-- Nav -->
+                    <nav>
+                        <a href="newinndex.xhtml">Homepage</a>
+                        <a href="newpublications.xhtml">Publications</a>
+                        <a href="twocolumn1.html">Profile</a>
+                        <a href="twocolumn2.html">Market</a>
+                        
+                        <h:outputLink style="font-weight:bold; font-size:1.8em" value="newlogin.xhtml" title="login">
+                            <h:outputText value="Sign in"/>
+                        </h:outputLink>
+
+
+
+                    </nav>
+
+                </div>
+            </header>
+            <div id="banner">
+                <div class="5grid 5grid-alt">
+                    <div class="6u-first">
+
+                        <!-- Banner Copy -->
+                        <p>Do you prefer the healthy lifestyle? Do you choose rather sport activity than sitting at home? So you are welcome to the Triary - the sport portal for the active people!</p>
+                        <h:form>
+                            <p:commandButton styleClass="button-big" style="font-family: 'Lobster', sans-serif;" value="Register now!"/>
+                        </h:form>
+
+
+                    </div>
+                    <div class="6u">
+
+                        <!-- Banner Image -->
+                        <a href="#" class="bordered-feature-image"><img src="images/stock-foot.jpg" alt="" /></a>
+
+                    </div>
+                    <div class="5grid-clear"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div id="features-wrapper">
+            <div id="features">
+                <div class="5grid">
+                    <div class="3u-first">
+
+                        <!-- Feature #1 -->
+                        <section>
+                            <a href="#" class="bordered-feature-image"><img src="images/male-hand.jpg" alt="" /></a>
+                            <h2>Read the news</h2>
+                            <p>
+                                Read the <strong>popular</strong> news about the bodybuildng and fitness. 
+                                We guarantee that you will know all the new information about competitions
+                                and another sport activities in the world!
+                            </p>
+                        </section>
+
+                    </div>
+                    <div class="3u">
+
+                        <!-- Feature #2 -->
+                        <section>
+                            <a href="#" class="bordered-feature-image"><img src="images/diary.jpg" alt="" /></a>
+                            <h2>Make notes in the diary</h2>
+                            <p>
+                                Yuo are to make notes where ever you are. Choose your execercise, number of repeats
+                                and save this note. See the statistics from the diary on the diagram
+                                using the values from diary.
+                            </p>
+                        </section>
+
+                    </div>
+                    <div class="3u">
+
+                        <!-- Feature #3 -->
+                        <section>
+                            <a href="#" class="bordered-feature-image"><img src="images/gym-equipment.jpg" alt="" /></a>
+                            <h2>Want to know how to train?</h2>
+                            <p>
+                                Read about the training methods and diets. Choose the best for your purposes and
+                                follow it everywhere, anytime! You'll learn how to get the serious mass or work off one's excess weight!
+                            </p>
+                        </section>
+
+                    </div>
+                    <div class="3u">
+
+                        <!-- Feature #4 -->
+                        <section>
+                            <a href="#" class="bordered-feature-image"><img src="images/BCAA.jpg" alt="" /></a>
+                            <h2>Learn about sport nutrition and buy it</h2>
+                            <p>
+                                The main components to build the strong body are concentrated proteins, fats and carbs. In this case you need the additional nutrition - sport nutrition.
+                            </p>
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div id="content-wrapper">
+            <div id="content">
+                <div class="5grid">
+                    <div class="4u-first">
+
+                        <!-- Box #1 -->
+                        <section>
+                            <header>
+                                <h2>Who We Are</h2>
+                                <h3>A subheading about who we are</h3>
+                            </header>
+                            <a href="#" class="feature-image"><img src="images/group.jpg" alt="" /></a>
+                            <p>
+                                We are the community that likes all kind of sport. We will motivate you and tell you everything you want to know about sport and it's facilities. Join us and let's motivate others!
+                            </p>
+                        </section>
+
+                    </div>
+                    <div class="4u">
+
+                        <!-- Box #2 -->
+                        <section>
+                            <header>
+                                <h2>What you can do there</h2>
+                                <h3>A subheading about what you can do</h3>
+                            </header>
+                            <ul class="check-list">
+                                <li>Read the news</li>
+                                <li>Learn about the diets and trainings</li>
+                                <li>Make notes in the sport diary</li>
+                                <li>See your statistics</li>
+                                <li>Read and buy the sport nutrition</li>
+                            </ul>
+                        </section>
+
+                    </div>
+                    <div class="4u">
+
+                        <!-- Box #3 -->
+                        <section>
+                            <header>
+                                <h2>Our slogans</h2>
+                                <h3>And a finally, follow these slogans!</h3>
+                            </header>
+                            <ul class="quote-list">
+                                <li>
+                                    <img src="images/black-dumbells.jpg" alt="" />
+                                    <p>"Train as hard as you can!"</p>
+
+                                </li>
+                                <li>
+                                    <img src="images/clock.jpg" alt="" />
+                                    <p>"Manage your time!"</p>
+
+                                </li>
+                                <li>
+                                    <img src="images/green-apple.jpg" alt="" />
+                                    <p>"Eat only healthy food"</p>
+
+                                </li>
+                            </ul>
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer-wrapper">
+            <footer id="footer" class="5grid">
+                <div class="8u-first">
+
+                    <!-- Links -->
+                    <section>
+                        <h2>Links to Important Stuff</h2>
+                        <div class="3u-first">
+                            <ul class="link-list last-child">
+                                <li><a href="#">About us</a></li>
+                            </ul>
+                        </div>
+                        <div class="3u">
+                            <ul class="link-list last-child">
+                                <li><a href="#">Blog</a></li>
+                            </ul>
+                        </div>
+                        <div class="3u">
+                            <ul class="link-list last-child">
+                                <li><a href="#">Contact us</a></li>
+                            </ul>
+                        </div>
+                        <div class="3u">
+                            <ul class="link-list last-child">
+                                <li><a href="#">Help and support</a></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </div>
+
+            </footer>
+        </div>
+
+        <!-- Copyright -->
+        <div id="copyright">
+            (c) 2013 Triary.com. All rights reserved.
+        </div>
+
+        <p:dialog id="dialog" header="Login" style="font-family: 'Yanone Kaffeesatz';" widgetVar="dlg">  
+            <h:form>  
+
+                <h:panelGrid columns="2" cellpadding="5">  
+                    <h:outputLabel for="username" value="Username:" style="font-family: 'Yanone Kaffeesatz';" />  
+                    <p:inputText    
+                                 id="username" required="true" label="username" />  
+
+                    <h:outputLabel for="password" value="Password:" style="font-family: 'Yanone Kaffeesatz';" />  
+                    <p:password id="password" required="true"/>  
+
+                    <f:facet name="footer">  
+                        <p:commandButton id="loginButton" value="Login" style="font-family: 'Yanone Kaffeesatz';" />  
+                    </f:facet>  
+                </h:panelGrid>  
+
+            </h:form>  
+        </p:dialog>  
+    </h:body>
+</html>
