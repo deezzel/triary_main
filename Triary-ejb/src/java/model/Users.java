@@ -34,7 +34,10 @@ public class Users extends UserBase implements Serializable {
     private List<Publication> publicationList;
     @OneToOne(mappedBy = "owner")
     private Diary diary;
-
+    @ManyToOne
+    @JoinColumn(name="cart", referencedColumnName="id")
+    private Cart cart;
+    
     public Users() {
     }
 
@@ -117,5 +120,19 @@ public class Users extends UserBase implements Serializable {
 
     public void setDiary(Diary diary) {
         this.diary = diary;
+    }
+
+    /**
+     * @return the cart
+     */
+    public Cart getCart() {
+        return cart;
+    }
+
+    /**
+     * @param cart the cart to set
+     */
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }
