@@ -6,6 +6,8 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -42,19 +44,21 @@ public class Orders extends BaseEntity implements Serializable{
     @ManyToOne
     @JoinColumn(name = "shipping", referencedColumnName="id")
     private Shipping shipping;
-
+    @OneToMany(mappedBy = "orders", cascade={CascadeType.ALL})
+    private List<Product> productList;
+    
     /**
      * @return the date
      */
     public Date getDate() {
-        return order_date;
+        return getOrder_date();
     }
 
     /**
      * @param date the date to set
      */
     public void setDate(Date date) {
-        this.order_date = date;
+        this.setOrder_date(date);
     }
 
     /**
@@ -83,5 +87,61 @@ public class Orders extends BaseEntity implements Serializable{
      */
     public void setState(String state) {
         this.state = state;
+    }
+
+    /**
+     * @return the order_date
+     */
+    public Date getOrder_date() {
+        return order_date;
+    }
+
+    /**
+     * @param order_date the order_date to set
+     */
+    public void setOrder_date(Date order_date) {
+        this.order_date = order_date;
+    }
+
+    /**
+     * @return the owner
+     */
+    public Users getOwner() {
+        return owner;
+    }
+
+    /**
+     * @param owner the owner to set
+     */
+    public void setOwner(Users owner) {
+        this.owner = owner;
+    }
+
+    /**
+     * @return the shipping
+     */
+    public Shipping getShipping() {
+        return shipping;
+    }
+
+    /**
+     * @param shipping the shipping to set
+     */
+    public void setShipping(Shipping shipping) {
+        this.shipping = shipping;
+    }
+
+    /**
+     * @return the productList
+     */
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    /**
+     * @param productList the productList to set
+     */
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 }

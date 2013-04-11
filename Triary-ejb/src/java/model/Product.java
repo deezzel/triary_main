@@ -24,26 +24,27 @@ import model.baseclass.BaseEntity;
 @XmlRootElement
 @Table(name = "product", catalog = "triary", schema = "")
 @NamedQueries({
-   @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")})
-public class Product extends BaseEntity implements Serializable{
-    @Column(name = "description", nullable=true, length = 1500)
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")})
+public class Product extends BaseEntity implements Serializable {
+
+    @Column(name = "description", nullable = true, length = 1500)
     private String description;
-    @Column(name = "name", nullable=true, length = 255)
+    @Column(name = "name", nullable = true, length = 255)
     private String name;
-    @Column(name = "image", nullable=true)
+    @Column(name = "image", nullable = true)
     @Lob
     private byte[] image;
-    @Column(name = "price", nullable=true)
+    @Column(name = "price", nullable = true)
     private String price;
-    @Column(name = "rating", nullable=true)
+    @Column(name = "rating", nullable = true)
     private Integer rating;
-    @Column(name = "count", nullable=true)
+    @Column(name = "count", nullable = true)
     private Integer count;
     @ManyToOne
     @JoinColumn(name = "category", referencedColumnName = "id")
     private Category category;
     @ManyToOne
-    @JoinColumn(name="orders", referencedColumnName="id")
+    @JoinColumn(name = "orders", referencedColumnName = "id")
     private Orders orders;
 
     /**
@@ -128,5 +129,33 @@ public class Product extends BaseEntity implements Serializable{
      */
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    /**
+     * @return the category
+     */
+    public Category getCategory() {
+        return category;
+    }
+
+    /**
+     * @param category the category to set
+     */
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    /**
+     * @return the orders
+     */
+    public Orders getOrders() {
+        return orders;
+    }
+
+    /**
+     * @param orders the orders to set
+     */
+    public void setOrders(Orders orders) {
+        this.orders = orders;
     }
 }
