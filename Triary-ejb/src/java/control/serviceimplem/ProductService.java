@@ -6,6 +6,8 @@ package control.serviceimplem;
 
 import control.IProductService;
 import java.util.List;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.Product;
@@ -14,6 +16,8 @@ import model.Product;
  *
  * @author kate
  */
+@LocalBean
+@Stateless
 public class ProductService extends Generic<Product> implements IProductService {
 
     @PersistenceContext(unitName = "Triary-ejbPU")

@@ -7,7 +7,9 @@ package beans.mbeans;
 import com.jsf.util.JsfUtil;
 import control.serviceimplem.DiaryService;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -51,7 +53,19 @@ public class DiaryManagedBean {
     private String selectedItemArnold;
     private String selectedItemSquats;
     private String selectedItemSwings;
+    private Map<String,String> muscle_grs;
+    
 
+    public DiaryManagedBean(){
+        muscle_grs = new HashMap<String,String>();
+        muscle_grs.put("Neck", "Neck");
+        muscle_grs.put("Back", "Back");
+        muscle_grs.put("Arms", "Arms");
+        muscle_grs.put("Pres", "Pres");
+        muscle_grs.put("Legs", "Legs");
+        muscle_grs.put("Chest", "Chest");
+    }
+    
     /**
      * @return the curDiary
      */
@@ -359,5 +373,19 @@ public class DiaryManagedBean {
      */
     public void setSelectedItemSwings(String selectedItemSwings) {
         this.selectedItemSwings = selectedItemSwings;
+    }
+
+    /**
+     * @return the muscle_grs
+     */
+    public Map<String,String> getMuscle_grs() {
+        return muscle_grs;
+    }
+
+    /**
+     * @param muscle_grs the muscle_grs to set
+     */
+    public void setMuscle_grs(Map<String,String> muscle_grs) {
+        this.muscle_grs = muscle_grs;
     }
 }

@@ -13,4 +13,6 @@ import model.Category;
  */
 public interface ICategoryService {
     public List<Category> getAll();
+    public List<String> getCategoryNames();
+    public Category getByName(String name);
 }

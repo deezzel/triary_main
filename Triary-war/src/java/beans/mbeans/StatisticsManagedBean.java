@@ -159,7 +159,7 @@ public class StatisticsManagedBean implements Serializable {
 
         categoryModel = new CartesianChartModel();
 
-        ChartSeries chartWeightStat = new ChartSeries("Вес");
+        ChartSeries chartWeightStat = new ChartSeries("Weight");
         for (int i = 1; i < lstdate.size();) {
             for (int j = 1; j < lstweight.size(); j++) {
                 chartWeightStat.set(lstdate.get(i), Integer.valueOf(lstweight.get(j)));
@@ -167,7 +167,7 @@ public class StatisticsManagedBean implements Serializable {
             }
         }
         
-        ChartSeries chartBicepsStat = new ChartSeries("Бицепс");
+        ChartSeries chartBicepsStat = new ChartSeries("Biceps");
         for (int i = 1; i < lstdate.size();) {
             for (int j = 1; j < lstbiceps.size(); j++) {
                 chartBicepsStat.set(lstdate.get(i), Integer.valueOf(lstbiceps.get(j)));
@@ -175,7 +175,7 @@ public class StatisticsManagedBean implements Serializable {
             }
         }
         
-        ChartSeries chartButtStat = new ChartSeries("Ягодицы");
+        ChartSeries chartButtStat = new ChartSeries("Butts");
         for (int i = 1; i < lstdate.size();) {
             for (int j = 1; j < lstbutt.size(); j++) {
                 chartButtStat.set(lstdate.get(i), Integer.valueOf(lstbutt.get(j)));
@@ -183,7 +183,7 @@ public class StatisticsManagedBean implements Serializable {
             }
         }
         
-        ChartSeries chartChestStat = new ChartSeries("Грудь");
+        ChartSeries chartChestStat = new ChartSeries("Chest");
         for (int i = 1; i < lstdate.size();) {
             for (int j = 1; j < lstchest.size(); j++) {
                 chartButtStat.set(lstdate.get(i), Integer.valueOf(lstchest.get(j)));
@@ -191,7 +191,7 @@ public class StatisticsManagedBean implements Serializable {
             }
         }
         
-        ChartSeries chartForearmStat = new ChartSeries("Предплечье");
+        ChartSeries chartForearmStat = new ChartSeries("Forearm");
         for (int i = 1; i < lstdate.size();) {
             for (int j = 1; j < lstforearm.size(); j++) {
                 chartForearmStat.set(lstdate.get(i), Integer.valueOf(lstforearm.get(j)));
@@ -199,7 +199,7 @@ public class StatisticsManagedBean implements Serializable {
             }
         }
         
-        ChartSeries chartNeckStat = new ChartSeries("Шея");
+        ChartSeries chartNeckStat = new ChartSeries("Neck");
         for (int i = 1; i < lstdate.size();) {
             for (int j = 1; j < lstneck.size(); j++) {
                 chartForearmStat.set(lstdate.get(i), Integer.valueOf(lstneck.get(j)));
@@ -207,7 +207,7 @@ public class StatisticsManagedBean implements Serializable {
             }
         }
         
-        ChartSeries chartShinStat = new ChartSeries("Голень");
+        ChartSeries chartShinStat = new ChartSeries("Shin");
         for (int i = 1; i < lstdate.size();) {
             for (int j = 1; j < lstshin.size(); j++) {
                 chartForearmStat.set(lstdate.get(i), Integer.valueOf(lstshin.get(j)));
@@ -215,7 +215,7 @@ public class StatisticsManagedBean implements Serializable {
             }
         }
         
-        ChartSeries chartThighStat = new ChartSeries("Бедро");
+        ChartSeries chartThighStat = new ChartSeries("Hip");
         for (int i = 1; i < lstdate.size();) {
             for (int j = 1; j < lstthigh.size(); j++) {
                 chartForearmStat.set(lstdate.get(i), Integer.valueOf(lstthigh.get(j)));
@@ -223,7 +223,7 @@ public class StatisticsManagedBean implements Serializable {
             }
         }
         
-        ChartSeries chartWaistStat = new ChartSeries("Талия");
+        ChartSeries chartWaistStat = new ChartSeries("Waist");
         for (int i = 1; i < lstdate.size();) {
             for (int j = 1; j < lstwaist.size(); j++) {
                 chartForearmStat.set(lstdate.get(i), Integer.valueOf(lstwaist.get(j)));
@@ -231,7 +231,7 @@ public class StatisticsManagedBean implements Serializable {
             }
         }
         
-        ChartSeries chartWristStat = new ChartSeries("Запястье");
+        ChartSeries chartWristStat = new ChartSeries("Wrist");
         for (int i = 1; i < lstdate.size();) {
             for (int j = 1; j < lstwrist.size(); j++) {
                 chartForearmStat.set(lstdate.get(i), Integer.valueOf(lstwrist.get(j)));

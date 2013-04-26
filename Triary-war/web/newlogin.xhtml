@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+
+<html
+    xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    >
+    <h:head>
+        <title>Triary (homepage)</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <!--5grid--><script src="css/5grid/viewport.js"></script><!--[if lt IE 9]><script src="css/5grid/ie.js"></script><![endif]--><link rel="stylesheet" href="css/5grid/responsive.css" /><!--/5grid-->
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
+        <!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+    </h:head>
+    <h:body>
+
+        <!-- Header -->
+        <div id="header-wrapper">
+            <header id="header" class="5grid">
+                <div class="12u-first">
+
+                    <!-- Logo -->
+                    <h1><a href="newinndex.xhtml">Triary</a></h1>
+
+                    <!-- Nav -->
+                    <nav>
+                        <a href="newinndex.xhtml">Homepage</a>
+                        <a href="newpublications.xhtml">Publications</a>
+                        <a href="twocolumn1.html">Profile</a>
+                        <a href="twocolumn2.html">Market</a>
+
+                        <h:outputLink style="font-weight:bold; font-size:1.8em" value="newlogin.xhtml" title="login">
+                            <h:outputText value="Sign in"/>
+                        </h:outputLink>
+
+
+
+                    </nav>
+
+                </div>
+            </header>
+        </div>
+
+        <!-- Content -->
+        <div id="content-wrapper">
+            <div id="content">
+                <div class="5grid">
+                    <div class="12u-first">
+
+                        <!-- Main Content -->
+                        <section>
+                            <header style="text-align:center">
+                                <h2>Sign in form</h2>
+                                <h3>Fill the form with the necessary fields</h3>
+                                <h:form id="loginForm" style="text-align:center; width:100%; margin-left: 22em">  
+
+                                    <h:panelGrid columns="2" cellpadding="5">  
+                                        <h:outputLabel for="username" value="Username:" style="font-family: 'Yanone Kaffeesatz'; color:black;" />  
+                                        <p:inputText    
+                                            id="username" required="true" label="username" value="#{userManagedBean.login}" />  
+                                        <p:spacer></p:spacer>
+                                        <p:message for="username" ></p:message>
+                                        <h:outputLabel for="password" value="Password:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
+                                        <p:password id="password" required="true" value="#{userManagedBean.password}"/>
+                                        <p:spacer></p:spacer>
+                                        <p:message for="password" ></p:message>
+
+                                        <p:commandButton id="loginButton" action="#{userManagedBean.login()}" ajax="true" value="Sign In" style="font-family: 'Yanone Kaffeesatz'" />  
+                                        <p style="text-align:left;color:black;">or <a href="newregistration.xhtml">register</a> if you don't have an account</p>
+                                    </h:panelGrid>  
+
+                                </h:form>  
+                            </header>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div id="footer-wrapper">
+            <footer id="footer" class="5grid">
+                <div class="8u-first">
+
+                    <!-- Links -->
+                    <section>
+                        <h2>Links to Important Stuff</h2>
+                        <div class="3u-first">
+                            <ul class="link-list last-child">
+                                <li><a href="#">About us</a></li>
+                            </ul>
+                        </div>
+                        <div class="3u">
+                            <ul class="link-list last-child">
+                                <li><a href="#">Blog</a></li>
+                            </ul>
+                        </div>
+                        <div class="3u">
+                            <ul class="link-list last-child">
+                                <li><a href="#">Contact us</a></li>
+                            </ul>
+                        </div>
+                        <div class="3u">
+                            <ul class="link-list last-child">
+                                <li><a href="#">Help and support</a></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </div>
+
+            </footer>
+        </div>
+
+        <!-- Copyright -->
+        <div id="copyright">
+            (c) 2013 Triary.com. All rights reserved.
+        </div>
+    </h:body>
+</html>

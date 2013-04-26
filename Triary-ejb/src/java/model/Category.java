@@ -23,7 +23,10 @@ import model.baseclass.BaseEntity;
 @XmlRootElement
 @Table(name = "category", catalog = "triary", schema = "")
 @NamedQueries({
-   @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")})
+   @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
+   @NamedQuery(name = "Category.getNames", query = "SELECT c.name FROM Category c ORDER BY c.name"),
+   @NamedQuery(name = "Category.getByName", query = "SELECT c FROM Category c where c.name = :name")
+})
 public class Category extends BaseEntity implements Serializable{
     
     @Column(name = "description", nullable=true, length = 1500)

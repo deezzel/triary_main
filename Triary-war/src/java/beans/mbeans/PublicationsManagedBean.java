@@ -19,7 +19,7 @@ import model.Users;
  */
 
 @ManagedBean(name = "publMB")
-@SessionScoped
+
 public class PublicationsManagedBean {
     private Users currentUser;
     private String login;

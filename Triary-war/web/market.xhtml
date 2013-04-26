@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+
+<html
+    xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    >
+    <h:head>
+        <title>Triary (homepage)</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <!--5grid--><script src="css/5grid/viewport.js"></script><!--[if lt IE 9]><script src="css/5grid/ie.js"></script><![endif]--><link rel="stylesheet" href="css/5grid/responsive.css" /><!--/5grid-->
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
+        <!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+    </h:head>
+    <h:body>
+
+        <!-- Header -->
+        <div id="header-wrapper">
+            <header id="header" class="5grid">
+                <div class="12u-first">
+
+                    <!-- Logo -->
+                    <h1><a href="newinndex.xhtml">Triary</a></h1>
+
+                    <!-- Nav -->
+                    <nav>
+                        <h:form>
+                            <a href="newinndex.xhtml">Homepage</a>
+                            <a style="font-weight:bold" href="newpublications.xhtml">News</a>
+                            <a style="font-weight:bold" href="newtrmethods.xhtml">Training Methods</a>
+                            <a style="font-weight:bold" href="newdiets.xhtml">Diets</a>
+                            <h:outputLink value="newprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText value="Profile"/></h:outputLink>
+                            <a href="twocolumn2.html">Market</a>
+                            <c:if test="${userManagedBean.currentUser==null}">
+                                <h:outputLink style="font-weight:bold; font-size:1.8em" value="newlogin.xhtml" title="login">
+                                    <h:outputText value="Sign in"/>
+                                </h:outputLink>
+                            </c:if>
+                            <c:if test="${userManagedBean.currentUser!=null}">
+
+                                <h:commandLink style="font-weight:bold; font-size:1.8em" action="#{userManagedBean.logout()}" title="logout">
+                                    <h:outputText value="Sign out"/>
+                                </h:commandLink>
+
+                            </c:if>
+
+                        </h:form>
+                    </nav>
+
+                </div>
+            </header>
+        </div>
+        <!-- Content -->
+        <div id="content-wrapper">
+            <div id="content">
+                <div class="5grid">
+                    <div class="9u-first">
+
+                        <!-- Main Content -->
+                        <section>
+                            <h:form id="product-form">
+                                <p:dataGrid var="product" value="#{marketMB.lstProducts}" columns="3"  
+                                            rows="12" paginator="true" paginatorPosition="bottom">
+                                    <p:panel header="#{product.name}" style="text-align:center">
+                                        <h:panelGrid columns="1" style="width:100%">  
+<!--                                            <p:graphicImage value="{product.image}"/>   -->
+
+                                            <h:outputText value="#{product.description}" />  
+
+                                            <p:commandLink ajax="true" update=":product-form:productDetail" oncomplete="productDialog.show()" title="View Detail">  
+                                                <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
+                                                <f:setPropertyActionListener value="#{product}"   
+                                                                             target="#{marketMB.selectedProduct}" />  
+                                            </p:commandLink>  
+                                        </h:panelGrid>  
+                                    </p:panel>
+                                </p:dataGrid>
+
+                                <p:dialog header="Product Detail" widgetVar="productDialog" modal="true">  
+                                    <p:outputPanel id="productDetail" style="text-align:center;" layout="block">  
+
+<!--                                        <p:graphicImage value="{marketMB.selectedProduct.image}"/>  -->
+
+                                        <h:panelGrid  columns="2" cellpadding="5">  
+                                            <h:outputLabel for="name" value="Name" />  
+                                            <h:outputText id="name" value="#{marketMB.selectedProduct.name}" />  
+
+                                            <h:outputLabel for="desc" value="Description: " />  
+                                            <h:outputText id="desc" value="#{marketMB.selectedProduct.description}" />  
+
+                                            <h:outputLabel for="price" value="Price: " />  
+                                            <h:outputText id="price" value="#{marketMB.selectedProduct.price}"/>  
+                                        </h:panelGrid>  
+                                    </p:outputPanel>  
+                                </p:dialog>  
+
+                            </h:form>
+                        </section>
+
+                    </div>
+                    <div class="3u">
+
+                        <!-- Sidebar -->
+                        <section>
+                            <h1>
+                                Top 10 purchased products
+                            </h1>
+                        </section>
+                        <section>
+                            <h1>
+                                Top 10 rated products
+                            </h1>
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div id="footer-wrapper">
+            <footer id="footer" class="5grid">
+                <div class="8u-first">
+
+                    <!-- Links -->
+                    <section>
+                        <h2>Links to Important Stuff</h2>
+                        <div class="3u-first">
+                            <ul class="link-list last-child">
+                                <li><a href="#">About us</a></li>
+                            </ul>
+                        </div>
+                        <div class="3u">
+                            <ul class="link-list last-child">
+                                <li><a href="#">Blog</a></li>
+                            </ul>
+                        </div>
+                        <div class="3u">
+                            <ul class="link-list last-child">
+                                <li><a href="#">Contact us</a></li>
+                            </ul>
+                        </div>
+                        <div class="3u">
+                            <ul class="link-list last-child">
+                                <li><a href="#">Help and support</a></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </div>
+
+            </footer>
+        </div>
+
+        <!-- Copyright -->
+        <div id="copyright">
+            (c) 2013 Triary.com. All rights reserved.
+        </div>
+    </h:body>
+</html>

@@ -6,6 +6,8 @@ package control.serviceimplem;
 
 import control.ICategoryService;
 import java.util.List;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.Category;
@@ -14,6 +16,8 @@ import model.Category;
  *
  * @author kate
  */
+@LocalBean
+@Stateless
 public class CategoryService extends Generic<Category> implements ICategoryService {
 
     @PersistenceContext(unitName = "Triary-ejbPU")
@@ -35,6 +39,16 @@ public class CategoryService extends Generic<Category> implements ICategoryServi
     @Override
     public List<Category> getAll() {
         return (List<Category>) em.createNamedQuery("Category.findAll").getResultList();
+    }
+
+    @Override
+    public List<String> getCategoryNames() {
+        return (List<String>) em.createNamedQuery("Category.getNames").getResultList();
+    }
+
+    @Override
+    public Category getByName(String name) {
+        return (Category) em.createNamedQuery("Category.getByName").setParameter("name", name).getSingleResult();
     }
     
 }

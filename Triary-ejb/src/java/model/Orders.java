@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import model.baseclass.BaseEntity;
 
 /**
@@ -134,6 +135,7 @@ public class Orders extends BaseEntity implements Serializable{
     /**
      * @return the productList
      */
+    @XmlTransient
     public List<Product> getProductList() {
         return productList;
     }
@@ -143,5 +145,17 @@ public class Orders extends BaseEntity implements Serializable{
      */
     public void setProductList(List<Product> productList) {
         this.productList = productList;
+    }
+    
+    public void addProduct(Product prod){
+        if (null != productList && null != prod){
+            productList.add(prod);
+        }
+    }
+    
+    public void removeProduct(Product prod){
+        if (null != productList && null != prod){
+            productList.remove(prod);
+        }
     }
 }
