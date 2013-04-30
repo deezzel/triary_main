@@ -29,22 +29,15 @@
 
                     <!-- Nav -->
                     <nav>
-                        <h:form>
-                            <c:if test="#{mainMB.currentPage!='index'}">
-                                <a href="newinndex.xhtml">Homepage</a>
-                            </c:if>
+                        <h:form>                          
                             <c:if test="#{mainMB.currentPage=='index'}">
                                 <a style="color:red" href="newinndex.xhtml">Homepage</a>
                             </c:if>
-                            <c:if test="#{mainMB.currentPage!='news'}">
                                 <a href="newpublications.xhtml">Publications</a>
-                            </c:if>
-                            <c:if test="#{mainMB.currentPage=='news'}">
-                                <a style="color:red" href="newpublications.xhtml">Publications</a>
-                            </c:if>
+                            
                             <h:outputLink value="newprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText value="Profile"/></h:outputLink>
                             <!--                        <a href="twocolumn1.html">Profile</a>-->
-                            <a href="twocolumn2.html">Market</a>
+                            <a href="market.xhtml">Market</a>
 
                             <c:if test="${userManagedBean.currentUser==null}">
                                 <h:outputLink style="font-weight:bold; font-size:1.8em" value="newlogin.xhtml" title="login">

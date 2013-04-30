@@ -29,19 +29,32 @@
 
                     <!-- Nav -->
                     <nav>
-                        <a href="newinndex.xhtml">Homepage</a>
-                        <a style="font-weight:bold" href="newpublications.xhtml">News</a>
-                        <a style="font-weight:bold" href="newtrmethods.xhtml">Training Methods</a>
-                        <a style="font-weight:bold" href="newdiets.xhtml">Diets</a>
-                        <a href="twocolumn1.html">Profile</a>
-                        <a href="twocolumn2.html">Market</a>
+                        <h:form>
+                            <a href="newinndex.xhtml">Homepage</a>
+                            <a style="font-weight:bold" href="newpublications.xhtml">News</a>
+                            <c:if test="#{mainMB.currentPage!='trmethods'}">
+                                <a style="font-weight:bold" href="newtrmethods.xhtml">Training Methods</a>
+                            </c:if>
+                            <c:if test="#{mainMB.currentPage=='trmethods'}">
+                                <a style="font-weight:bold; color:red" href="newtrmethods.xhtml">Training Methods</a>
+                            </c:if>
+                            <a style="font-weight:bold" href="newdiets.xhtml">Diets</a>
+                            <h:outputLink value="newprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText value="Profile"/></h:outputLink>
+                            <a href="market.xhtml">Market</a>
+                            <c:if test="${userManagedBean.currentUser==null}">
+                                <h:outputLink style="font-weight:bold; font-size:1.8em" value="newlogin.xhtml" title="login">
+                                    <h:outputText value="Sign in"/>
+                                </h:outputLink>
+                            </c:if>
+                            <c:if test="${userManagedBean.currentUser!=null}">
 
-                        <h:outputLink style="font-weight:bold; font-size:1.8em" value="newlogin.xhtml" title="login">
-                            <h:outputText value="Sign in"/>
-                        </h:outputLink>
+                                <h:commandLink style="font-weight:bold; font-size:1.8em" action="#{userManagedBean.logout()}" title="logout">
+                                    <h:outputText value="Sign out"/>
+                                </h:commandLink>
 
+                            </c:if>
 
-
+                        </h:form>
                     </nav>
 
                 </div>

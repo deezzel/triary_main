@@ -35,7 +35,9 @@
                             <a style="font-weight:bold" href="newtrmethods.xhtml">Training Methods</a>
                             <a style="font-weight:bold" href="newdiets.xhtml">Diets</a>
                             <h:outputLink value="newprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText value="Profile"/></h:outputLink>
-                            <a href="twocolumn2.html">Market</a>
+                            <c:if test="#{mainMB.currentPage=='market'}">
+                                <a style="color:red" href="market.xhtml">Market</a>
+                            </c:if>
                             <c:if test="${userManagedBean.currentUser==null}">
                                 <h:outputLink style="font-weight:bold; font-size:1.8em" value="newlogin.xhtml" title="login">
                                     <h:outputText value="Sign in"/>
@@ -68,7 +70,7 @@
                                             rows="12" paginator="true" paginatorPosition="bottom">
                                     <p:panel header="#{product.name}" style="text-align:center">
                                         <h:panelGrid columns="1" style="width:100%">  
-<!--                                            <p:graphicImage value="{product.image}"/>   -->
+                                            <h:graphicImage value="ImageDisplay?product_id=#{product.id}" width="150px" height="150px"/>   
 
                                             <h:outputText value="#{product.description}" />  
 

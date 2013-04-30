@@ -34,8 +34,10 @@
                             <a style="font-weight:bold" href="newpublications.xhtml">News</a>
                             <a style="font-weight:bold" href="newtrmethods.xhtml">Training Methods</a>
                             <a style="font-weight:bold" href="newdiets.xhtml">Diets</a>
-                            <h:outputLink value="newprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText value="Profile"/></h:outputLink>
-                            <a href="twocolumn2.html">Market</a>
+                            <c:if test="#{mainMB.currentPage=='profile'}">
+                                <h:outputLink value="newprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText style="color:red" value="Profile"/></h:outputLink>
+                            </c:if>
+                            <a href="market.xhtml">Market</a>
                             <c:if test="${userManagedBean.currentUser==null}">
                                 <h:outputLink style="font-weight:bold; font-size:1.8em" value="newlogin.xhtml" title="login">
                                     <h:outputText value="Sign in"/>
