@@ -16,6 +16,14 @@
         <link rel="stylesheet" href="css/style.css" />
         <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+        <style type="text/css">
+            .ui-growl{
+                font-family: 'Yanone Kaffeesatz';
+                position: absolute;
+                top:10em;
+                left: 25em;                
+            }
+        </style>
     </h:head>
     <h:body>
 
@@ -29,17 +37,33 @@
 
                     <!-- Nav -->
                     <nav>
-                        <a href="newinndex.xhtml">Homepage</a>
-                        <a href="newpublications.xhtml">Publications</a>
-                        <a href="twocolumn1.html">Profile</a>
-                        <a href="twocolumn2.html">Market</a>
-
-                        <h:outputLink style="font-weight:bold; font-size:1.8em" value="newlogin.xhtml" title="login">
-                            <h:outputText value="Sign in"/>
-                        </h:outputLink>
-
-
-
+                        <h:form>
+                            <a href="newinndex.xhtml">Homepage</a>
+                            <a href="newpublications.xhtml">Publications</a>
+                            <c:if test="#{userManagedBean.currentUser==null}">
+                                <p:growl id="growl" showDetail="true" sticky="false" life="2000" />
+                                <p:commandLink ajax="true" update="growl" actionListener="#{mainMB.addWarn}">
+                                    <h:outputText value="Profile"/>
+                                </p:commandLink>                                
+                            </c:if>    
+                            <c:if test="#{userManagedBean.currentUser!=null}">
+                                <h:outputLink value="newprofile.xhtml">
+                                    <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
+                                    <h:outputText value="Profile"/>
+                                </h:outputLink>
+                            </c:if>
+                            <a href="market.xhtml">Market</a>
+                            <c:if test="${userManagedBean.currentUser==null}">
+                                <h:outputLink style="font-weight:bold; font-size:1.8em" value="newlogin.xhtml" title="login">
+                                    <h:outputText value="Sign in"/>
+                                </h:outputLink>
+                            </c:if>
+                            <c:if test="${userManagedBean.currentUser!=null}">
+                                <h:commandLink style="font-weight:bold; font-size:1.8em" action="#{userManagedBean.logout()}" title="logout">
+                                    <h:outputText value="Sign out"/>
+                                </h:commandLink>
+                            </c:if>
+                        </h:form>
                     </nav>
 
                 </div>
@@ -63,19 +87,19 @@
                                         <h:outputLabel for="firstname" value="First name:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
                                         <p:inputText    
                                             id="firstname" required="true" label="firstname" />
-                                        
+
                                         <h:outputLabel for="lastname" value="Last name:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
                                         <p:inputText    
                                             id="lastname" required="true" label="lastname" />
-                                        
+
                                         <h:outputLabel for="email" value="E-mail:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
                                         <p:inputText    
                                             id="email" required="true" label="email" />
-                                        
+
                                         <h:outputLabel for="phone" value="Phone:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
                                         <p:inputMask    
                                             id="phone" required="true" label="phone" mask="(999) 999-9999" />
-                                        
+
                                         <h:outputLabel for="username" value="Username:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
                                         <p:inputText    
                                             id="username" required="true" label="username" />  
@@ -84,11 +108,11 @@
                                         <p:password id="password" required="true"/>  
 
                                         <p:messages showDetail="true"/>
-  
+
                                         <p:captcha label="Captcha"/>
 
                                         <p:commandButton id="regButton" value="Register" style="font-family: 'Yanone Kaffeesatz';" />  
-                                        
+
                                     </h:panelGrid>  
 
                                 </h:form>  

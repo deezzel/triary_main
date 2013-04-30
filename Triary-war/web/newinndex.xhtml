@@ -16,6 +16,14 @@
         <link rel="stylesheet" href="css/style.css" />
         <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+        <style type="text/css">
+            .ui-growl{
+                font-family: 'Yanone Kaffeesatz';
+                position: absolute;
+                top:10em;
+                left: 25em;                
+            }
+        </style>
     </h:head>
     <h:body>
 
@@ -29,13 +37,25 @@
 
                     <!-- Nav -->
                     <nav>
-                        <h:form>                          
+                        <h:form id="form">                          
                             <c:if test="#{mainMB.currentPage=='index'}">
                                 <a style="color:red" href="newinndex.xhtml">Homepage</a>
                             </c:if>
-                                <a href="newpublications.xhtml">Publications</a>
+                            <a href="newpublications.xhtml">Publications</a>
                             
-                            <h:outputLink value="newprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText value="Profile"/></h:outputLink>
+                            <c:if test="#{userManagedBean.currentUser==null}">
+                                <p:growl id="growl" showDetail="true" sticky="false" life="2000" />
+                                <p:commandLink ajax="true" update="growl" actionListener="#{mainMB.addWarn}">
+                                    <h:outputText value="Profile"/>
+                                </p:commandLink>
+                                
+                            </c:if>    
+                            <c:if test="#{userManagedBean.currentUser!=null}">
+                            <h:outputLink value="newprofile.xhtml">
+                                <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
+                                <h:outputText value="Profile"/>
+                            </h:outputLink>
+                            </c:if>
                             <!--                        <a href="twocolumn1.html">Profile</a>-->
                             <a href="market.xhtml">Market</a>
 

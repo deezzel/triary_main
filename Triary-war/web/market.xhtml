@@ -16,6 +16,14 @@
         <link rel="stylesheet" href="css/style.css" />
         <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+        <style type="text/css">
+            .ui-growl{
+                font-family: 'Yanone Kaffeesatz';
+                position: absolute;
+                top:10em;
+                left: 25em;                
+            }
+        </style>
     </h:head>
     <h:body>
 
@@ -34,7 +42,18 @@
                             <a style="font-weight:bold" href="newpublications.xhtml">News</a>
                             <a style="font-weight:bold" href="newtrmethods.xhtml">Training Methods</a>
                             <a style="font-weight:bold" href="newdiets.xhtml">Diets</a>
-                            <h:outputLink value="newprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText value="Profile"/></h:outputLink>
+                            <c:if test="#{userManagedBean.currentUser==null}">
+                                <p:growl id="growl" showDetail="true" sticky="false" life="2000" />
+                                <p:commandLink ajax="true" update="growl" actionListener="#{mainMB.addWarn}">
+                                    <h:outputText value="Profile"/>
+                                </p:commandLink>                                
+                            </c:if>    
+                            <c:if test="#{userManagedBean.currentUser!=null}">
+                            <h:outputLink value="newprofile.xhtml">
+                                <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
+                                <h:outputText value="Profile"/>
+                            </h:outputLink>
+                            </c:if>
                             <c:if test="#{mainMB.currentPage=='market'}">
                                 <a style="color:red" href="market.xhtml">Market</a>
                             </c:if>
@@ -44,11 +63,9 @@
                                 </h:outputLink>
                             </c:if>
                             <c:if test="${userManagedBean.currentUser!=null}">
-
                                 <h:commandLink style="font-weight:bold; font-size:1.8em" action="#{userManagedBean.logout()}" title="logout">
                                     <h:outputText value="Sign out"/>
                                 </h:commandLink>
-
                             </c:if>
 
                         </h:form>
