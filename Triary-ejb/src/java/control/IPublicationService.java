@@ -20,7 +20,11 @@ public interface IPublicationService {
     
     public List<Publication> getByType (String type);
     
+    public List<Publication> getTopPubls(String type);
+    
     public List<Publication> getByAutor (Users usr);
+    
+    public Integer getVisits (Integer id_publ);
     
     public List<Publication> getAll();
     

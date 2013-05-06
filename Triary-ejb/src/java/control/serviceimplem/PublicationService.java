@@ -69,5 +69,15 @@ public class PublicationService extends Generic<Publication> implements IPublica
     public List<Publication> getAll() {
         return (List<Publication>) em.createNamedQuery("Publication.findAll").getResultList();
     }
+
+    @Override
+    public Integer getVisits(Integer id_publ) {
+        return (Integer) em.createNamedQuery("Publication.getVisits").setParameter("id", id_publ).getSingleResult();
+    }
+
+    @Override
+    public List<Publication> getTopPubls(String type) {
+        return (List<Publication>) em.createNamedQuery("Publication.getTopPubls").setParameter("type", type).getResultList();
+    }
     
 }

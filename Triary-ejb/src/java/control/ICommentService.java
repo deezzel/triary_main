@@ -16,6 +16,7 @@ public interface ICommentService {
     
     public List<Comment> getByDiary(Diary diary);
     public List<Comment> getAll();
+    public Integer countComments(Publication publ);
     
     public boolean addComment (Comment com, Publication pub, Users usr);
  

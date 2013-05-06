@@ -40,21 +40,21 @@
                         <h:form>
                             <a href="newinndex.xhtml">Homepage</a>
                             <c:if test="#{mainMB.currentPage=='news'}">
-                            <a style="font-weight:bold; color:red" href="newpublications.xhtml">News</a>
+                                <a style="font-weight:bold; color:red" href="newpublications.xhtml">News</a>
                             </c:if>
                             <a style="font-weight:bold" href="newtrmethods.xhtml">Training Methods</a>
                             <a style="font-weight:bold" href="newdiets.xhtml">Diets</a>
                             <c:if test="#{userManagedBean.currentUser==null}">
                                 <p:growl id="growl" showDetail="true" sticky="false" life="2000" />
                                 <p:commandLink ajax="true" update="growl" actionListener="#{mainMB.addWarn}">
-                                    <h:outputText value="Profile"/>
+                                    <h:outputText style="font-family: 'Yanone Kaffeesatz';" value="Profile"/>
                                 </p:commandLink>                                
                             </c:if>    
                             <c:if test="#{userManagedBean.currentUser!=null}">
-                            <h:outputLink value="newprofile.xhtml">
-                                <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
-                                <h:outputText value="Profile"/>
-                            </h:outputLink>
+                                <h:outputLink value="newprofile.xhtml">
+                                    <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
+                                    <h:outputText style="font-family: 'Yanone Kaffeesatz';" value="Profile"/>
+                                </h:outputLink>
                             </c:if>
                             <a href="market.xhtml">Market</a>
                             <c:if test="${userManagedBean.currentUser==null}">
@@ -99,29 +99,32 @@
                                             <strong><h:outputText value="#{news.title}" style="float: left; font-weight:bold" /></strong>
 
                                             <br></br>
-                                            <h:outputText value="#{news.subtext}..." style="float: left" escape="false"/>
+                                            <h:outputText value="#{news.subtext}..." style="float: left"  escape="false"/>
                                             <br></br>
 
                                             <p:spacer height="1em"></p:spacer>
                                             <c:if test="${publMB.admin}">
-                                                <p:button image="ui-icon-pencil" outcome="updatepubl" title="Редактировать" style="float: right">
+                                                <p:button image="ui-icon-pencil" outcome="newupdatepubl" title="Update" style="float: right">
                                                     <f:param name="idpubl" value="#{news.id}"/>
                                                 </p:button>
-                                                <p:commandButton title="Удалить" ajax="false" update="@form" image="ui-icon-trash" action="#{publMB.delNews()}" style="float: right; padding-right: 10px">
+                                                <p:commandButton title="Remove" ajax="false" update="@form" image="ui-icon-trash" action="#{publMB.delNews()}" style="float: right; padding-right: 10px">
                                                     <f:setPropertyActionListener target="#{publMB.id_pub}" value="#{news.id}"/>
                                                 </p:commandButton>
                                             </c:if>
                                             <p:spacer width="1em" height="1em"></p:spacer>
                                             <br/><p>  </p>
-                                            <h:outputLink value="comment_news.xhtml" style="float: right">
+                                            <h:outputLink  value="newcommentpubl.xhtml" style="float: right">
                                                 <f:param name="id_news" value="#{news.id}"/>
+
                                                 <h:outputText value="read more" style="font-family: 'Yanone Kaffeesatz';"/>
                                             </h:outputLink>
 
                                         </p:column>
                                     </section>
                                 </p:dataGrid>
-
+                                <c:if test="${publMB.admin}">
+                                    <p:button title="Add news" outcome="newaddpubl" value="Add news" image="ui-icon-plus" style="font-family: 'Yanone Kaffeesatz';"/>
+                                </c:if>
                             </h:form>
                         </section>
 
@@ -133,16 +136,55 @@
                             <h1>
                                 Top 10 news
                             </h1>
+                            <h:form>
+                                <p:dataGrid value="#{publMB.lstTopNews}" var="topnews"  
+                                            rows="10" 
+                                            columns="1"
+                                            >
+                                    <li>
+                                    <h:outputLink  value="newcommentpubl.xhtml">
+                                        <f:param name="id_news" value="#{topnews.id}"/>
+                                        <h:outputText value="#{topnews.title}" style="font-family: 'Yanone Kaffeesatz';color:black; font-size:0.8em"/>
+                                    </h:outputLink>
+                                    </li>
+                                </p:dataGrid>
+                            </h:form>
                         </section>
                         <section>
                             <h1>
                                 Top 10 training methods
                             </h1>
+                            <h:form>
+                                <p:dataGrid value="#{publMB.lstTopTrMethods}" var="toptrmethods"  
+                                            rows="10" 
+                                            columns="1"
+                                            >
+                                    <li>
+                                    <h:outputLink  value="newcommentpubl.xhtml">
+                                        <f:param name="id_news" value="#{toptrmethods.id}"/>
+                                        <h:outputText value="#{toptrmethods.title}" style="font-family: 'Yanone Kaffeesatz';color:black; font-size:0.8em"/>
+                                    </h:outputLink>
+                                    </li>
+                                </p:dataGrid>
+                            </h:form>
                         </section>
                         <section>
                             <h1>
                                 Top 10 diets
                             </h1>
+                            <h:form>
+                                <p:dataGrid value="#{publMB.lstTopDiets}" var="topdiets"  
+                                            rows="10" 
+                                            columns="1"
+                                            >
+                                    <li>
+                                    <h:outputLink  value="newcommentpubl.xhtml">
+                                        <f:param name="id_news" value="#{topdiets.id}"/>
+                                        <h:outputText value="#{topdiets.title}" style="font-family: 'Yanone Kaffeesatz';color:black; font-size:0.8em"/>
+                                    </h:outputLink>
+                                    </li>
+                                </p:dataGrid>
+                            </h:form>
                         </section>
                     </div>
                 </div>

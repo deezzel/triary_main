@@ -114,6 +114,11 @@ public class CommentService extends Generic<Comment> implements ICommentService{
         return true;
     }
 
+    @Override
+    public Integer countComments(Publication publ) {
+        return ((Number) em.createNamedQuery("Comment.countComments").setParameter("publication", publ).getSingleResult()).intValue();
+    }
+
    
 
    

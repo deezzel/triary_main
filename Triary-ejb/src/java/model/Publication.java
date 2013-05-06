@@ -12,7 +12,7 @@ import model.baseclass.BaseEntity;
 import model.baseclass.PublicType;
 /**
  *
- * @author aliona
+ * @author kate
  */
 @Entity
 @Table(name = "publication", catalog = "triary", schema = "")
@@ -21,8 +21,10 @@ import model.baseclass.PublicType;
    @NamedQuery(name = "Publication.findAll", query = "SELECT p FROM Publication p"),
     //@NamedQuery(name = "Publication.findByText", query = "SELECT p FROM Publication p WHERE p.text = :text"),
     @NamedQuery(name = "Publication.findByTitle", query = "SELECT p FROM Publication p WHERE p.title = :title"),
+    @NamedQuery(name = "Publication.getVisits", query = "SELECT p.visits FROM Publication p WHERE p.id = :id"),
     //@NamedQuery(name = "Publication.findByDate", query = "SELECT p FROM Publication p WHERE p.date_publ = :date"),
     //@NamedQuery(name = "Publication.getByAutor", query = "SELECT p FROM Publication p WHERE p.autor_id = :autor"),
+    @NamedQuery(name="Publication.getTopPubls", query = "SELECT p FROM Publication p WHERE p.type = :type ORDER BY p.visits DESC"),
     @NamedQuery(name = "Publication.findByType", query = "SELECT p FROM Publication p WHERE p.type = :type ORDER BY p.date_publ DESC")
 })
 public class Publication extends BaseEntity implements Serializable {
@@ -40,6 +42,8 @@ public class Publication extends BaseEntity implements Serializable {
    // @Size(min = 1, max = 15)
     @Column(name = "type", nullable = true, length = 55)
     private String type;
+    @Column(name = "visits", nullable=true)
+    private Integer visits;
     @OneToMany(mappedBy = "publication", cascade={CascadeType.ALL})
     private List<Comment> commentList;
     @JoinColumn(name = "autor", referencedColumnName = "id")
@@ -149,6 +153,20 @@ public class Publication extends BaseEntity implements Serializable {
     
     public void setTypeTrMethod() {
         this.type = PublicType.TRAININGMETHOD.toString();         
+    }
+
+    /**
+     * @return the visits
+     */
+    public Integer getVisits() {
+        return visits;
+    }
+
+    /**
+     * @param visits the visits to set
+     */
+    public void setVisits(Integer visits) {
+        this.visits = visits;
     }
     
 }
