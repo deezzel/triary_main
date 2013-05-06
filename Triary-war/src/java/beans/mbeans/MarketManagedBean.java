@@ -61,5 +61,7 @@ public class MarketManagedBean implements Serializable{
     public void setSelectedProduct(Product selectedProduct) {
         this.selectedProduct = selectedProduct;
     }
+    
+    
 
 }

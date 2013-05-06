@@ -45,7 +45,7 @@ public class UpdatePublicationManagedBean {
     publicationService.edit(updatePubl);
     
    // updatePubl = null;
-     try {   FacesContext.getCurrentInstance().getExternalContext().redirect("/Triary-war/news.xhtml");
+     try {   FacesContext.getCurrentInstance().getExternalContext().redirect("newpublications.xhtml");
                
             } catch (IOException ex) {
                Logger.getLogger(UserManagedBean.class.getName()).log(Level.SEVERE, null, ex);

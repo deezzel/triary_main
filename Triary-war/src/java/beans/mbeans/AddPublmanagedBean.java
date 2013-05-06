@@ -83,9 +83,10 @@ public class AddPublmanagedBean {
             currpubl.setDate_publ(java.util.Calendar.getInstance().getTime());
             currpubl.setAutor(usrMB.getCurrentUser());
             currpubl.setType(selectedItem);
+            currpubl.setVisits(0);
             publicationService.create(currpubl);
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/Triary-war/news.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("newpublications.xhtml");
 
             } catch (IOException ex) {
                 Logger.getLogger(UserManagedBean.class.getName()).log(Level.SEVERE, null, ex);

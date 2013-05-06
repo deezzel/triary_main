@@ -5,11 +5,15 @@
 package beans.mbeans;
 
 import control.serviceimplem.PublicationService;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import model.Publication;
 import model.Users;
 
@@ -28,6 +32,9 @@ public class PublicationsManagedBean {
     private List<Publication> lstNews;
     private List<Publication> lstTrMethods;
     private List<Publication> lstDiets;
+    private List<Publication> lstTopNews;
+    private List<Publication> lstTopTrMethods;
+    private List<Publication> lstTopDiets;
     @EJB
     private PublicationService PublicationService;
     @ManagedProperty(value = "#{userManagedBean}")
@@ -67,6 +74,33 @@ public class PublicationsManagedBean {
     
     public void setLstDiets() {
        lstDiets = (List<Publication>) PublicationService.getByType("DIET");
+    }
+    
+    public void setLstTopNews(){
+        lstTopNews = (List<Publication>) PublicationService.getTopPubls("NEWS");
+    }
+    
+    public List<Publication> getLstTopNews(){
+        setLstTopNews();
+        return lstTopNews;
+    }
+    
+    public void setLstTopTrMethods(){
+        lstTopTrMethods = (List<Publication>) PublicationService.getTopPubls("TRAININGMETHOD");
+    }
+    
+    public List<Publication> getLstTopTrMethods(){
+        setLstTopTrMethods();
+        return lstTopTrMethods;
+    }
+    
+    public void setLstTopDiets(){
+        lstTopDiets = (List<Publication>) PublicationService.getTopPubls("DIET");
+    }
+    
+    public List<Publication> getLstTopDiets(){
+        setLstTopDiets();
+        return lstTopDiets;
     }
 
     /**
@@ -111,5 +145,17 @@ public class PublicationsManagedBean {
             }
         }
         return false;
+    }
+    
+        public void incVisits(){
+//        Integer visits = currentPubl.getVisits();
+//        visits++;
+//        PublicationService.edit(currentPubl);
+        
+        try {   FacesContext.getCurrentInstance().getExternalContext().redirect("newpublications.xhtml");
+               
+            } catch (IOException ex) {
+               Logger.getLogger(UserManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 }

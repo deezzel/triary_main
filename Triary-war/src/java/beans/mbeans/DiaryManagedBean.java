@@ -20,14 +20,16 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 import model.Diary;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
  * @author kate
  */
 @ManagedBean(name = "diarylMB")
-@ViewScoped
+@SessionScoped
 public class DiaryManagedBean {
 
     private Diary curDiary = new Diary();
@@ -53,11 +55,10 @@ public class DiaryManagedBean {
     private String selectedItemArnold;
     private String selectedItemSquats;
     private String selectedItemSwings;
-    private Map<String,String> muscle_grs;
-    
+    private Map<String, String> muscle_grs;
 
-    public DiaryManagedBean(){
-        muscle_grs = new HashMap<String,String>();
+    public DiaryManagedBean() {
+        muscle_grs = new HashMap<String, String>();
         muscle_grs.put("Neck", "Neck");
         muscle_grs.put("Back", "Back");
         muscle_grs.put("Arms", "Arms");
@@ -65,7 +66,7 @@ public class DiaryManagedBean {
         muscle_grs.put("Legs", "Legs");
         muscle_grs.put("Chest", "Chest");
     }
-    
+
     /**
      * @return the curDiary
      */
@@ -84,7 +85,9 @@ public class DiaryManagedBean {
      * @return the lstDiary
      */
     public List<Diary> getLstDiary() {
-        setLstDiary();
+        if (lstDiary == null){
+            lstDiary = (List<Diary>) diaryService.getAll(usrMB.getCurrentUser());
+        }
         return lstDiary;
     }
 
@@ -122,19 +125,24 @@ public class DiaryManagedBean {
         curDiary.setOwner(usrMB.getCurrentUser());
         diaryService.create(curDiary);
 //        try {
-            //FacesContext.getCurrentInstance().getExternalContext().redirect(".");
-            FacesContext context = FacesContext.getCurrentInstance();
-            String viewId = context.getViewRoot().getViewId();
-            ViewHandler handler = context.getApplication().getViewHandler();
-            UIViewRoot root = handler.createView(context, viewId);
-            root.setViewId(viewId);
-            context.setViewRoot(root);
+        //FacesContext.getCurrentInstance().getExternalContext().redirect(".");
+        FacesContext context = FacesContext.getCurrentInstance();
+        String viewId = context.getViewRoot().getViewId();
+        ViewHandler handler = context.getApplication().getViewHandler();
+        UIViewRoot root = handler.createView(context, viewId);
+        root.setViewId(viewId);
+        context.setViewRoot(root);
+        try {
+            context.getExternalContext().redirect("newdiary.xhtml?id_user="+usrMB.getCurrentUser().returnUserID());
+        } catch (IOException ex) {
+            Logger.getLogger(DiaryManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-//        } catch (IOException ex) {
-//            Logger.getLogger(UserManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
-
+    }
+    
+    public void editRecord(RowEditEvent event){
+        Diary updated = (Diary) event.getObject();
+        diaryService.edit(updated);
     }
 
     /**
@@ -378,14 +386,14 @@ public class DiaryManagedBean {
     /**
      * @return the muscle_grs
      */
-    public Map<String,String> getMuscle_grs() {
+    public Map<String, String> getMuscle_grs() {
         return muscle_grs;
     }
 
     /**
      * @param muscle_grs the muscle_grs to set
      */
-    public void setMuscle_grs(Map<String,String> muscle_grs) {
+    public void setMuscle_grs(Map<String, String> muscle_grs) {
         this.muscle_grs = muscle_grs;
     }
 }

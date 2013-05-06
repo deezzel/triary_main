@@ -14,4 +14,5 @@ import model.Product;
 public interface IProductService {
     public List<Product> getAll();
     
+    public byte[] getImage(Integer product_id);
 }

@@ -86,6 +86,7 @@
                             </p:breadCrumb>
 
                             <section>
+                                <h:form id="diet-form" prependId="false">
                                 <h1>
                                     My diet and nutrition
                                 </h1>
@@ -93,8 +94,10 @@
                                     <p:inputTextarea rows="6" cols="33" value="#{profileMB.curprofile.diet}" />
                                     <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
                                 </p:inplace>
+                                </h:form>
                             </section>
                             <section>
+                                <h:form id="method-form" prependId="false">
                                 <h1>
                                     My training method
                                 </h1>
@@ -102,6 +105,7 @@
                                     <p:inputTextarea rows="6" cols="33" value="#{profileMB.curprofile.ration}" />
                                     <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
                                 </p:inplace>
+                                </h:form>
                             </section>
                             <section>
                                 <h1>

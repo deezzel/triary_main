@@ -54,10 +54,10 @@ public class Users extends UserBase implements Serializable {
         this.roleuser = roleuser;
     }
     
-    public void addRecordIntoDiary(Diary diary){
-        if (diary != null){
-            
-        }
+    
+    
+    public Integer returnUserID(){
+        return this.id;
     }
     
     public void addPublication(Publication publ) {
@@ -135,4 +135,5 @@ public class Users extends UserBase implements Serializable {
     public void setCart(Cart cart) {
         this.cart = cart;
     }
+    
 }

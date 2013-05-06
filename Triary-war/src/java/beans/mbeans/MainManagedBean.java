@@ -4,9 +4,14 @@
  */
 package beans.mbeans;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -55,5 +60,10 @@ public class MainManagedBean {
                         return "market";
         
     }
+    
+    public void addWarn(ActionEvent actionEvent) {  
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Warning", "Please log in to the system in order to view you profile"));
+        return;
+    }  
     
 }

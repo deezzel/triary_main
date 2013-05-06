@@ -21,7 +21,7 @@
                 font-family: 'Yanone Kaffeesatz';
                 position: absolute;
                 top:10em;
-                left: 25em;                
+                left: 25em;
             }
         </style>
     </h:head>
@@ -39,17 +39,19 @@
                     <nav>
                         <h:form>
                             <a href="newinndex.xhtml">Homepage</a>
-                            <a href="newpublications.xhtml">Publications</a>
+                            <a style="font-weight:bold" href="newpublications.xhtml">News</a>
+                            <a style="font-weight:bold" href="newtrmethods.xhtml">Training Methods</a>
+                            <a style="font-weight:bold" href="newdiets.xhtml">Diets</a>
                             <c:if test="#{userManagedBean.currentUser==null}">
                                 <p:growl id="growl" showDetail="true" sticky="false" life="2000" />
                                 <p:commandLink ajax="true" update="growl" actionListener="#{mainMB.addWarn}">
-                                    <h:outputText style="font-family: 'Yanone Kaffeesatz'; value="Profile"/>
+                                    <h:outputText style="font-family: 'Yanone Kaffeesatz';" value="Profile"/>
                                 </p:commandLink>                                
                             </c:if>    
                             <c:if test="#{userManagedBean.currentUser!=null}">
                                 <h:outputLink value="newprofile.xhtml">
                                     <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
-                                    <h:outputText style="font-family: 'Yanone Kaffeesatz'; value="Profile"/>
+                                    <h:outputText value="Profile"/>
                                 </h:outputLink>
                             </c:if>
                             <a href="market.xhtml">Market</a>
@@ -59,64 +61,79 @@
                                 </h:outputLink>
                             </c:if>
                             <c:if test="${userManagedBean.currentUser!=null}">
+
                                 <h:commandLink style="font-weight:bold; font-size:1.8em" action="#{userManagedBean.logout()}" title="logout">
                                     <h:outputText value="Sign out"/>
                                 </h:commandLink>
+
                             </c:if>
+
                         </h:form>
                     </nav>
 
                 </div>
             </header>
         </div>
-
         <!-- Content -->
         <div id="content-wrapper">
             <div id="content">
                 <div class="5grid">
-                    <div class="12u-first">
+                    <div class="9u-first">
 
                         <!-- Main Content -->
                         <section>
-                            <header style="text-align:center">
-                                <h2>Registration</h2>
-                                <h3>Fill the form with the necessary fields</h3>
-                                <h:form style="text-align:center; width:100%; margin-left: 22em">  
+                            <h:form>
+                                <strong><h:outputText value="#{addcommMB.currentPubl.title}" style="float: left; font-size:1.4em;font-weight:bold"/></strong><br/>
+                                <h:outputText style="font-size:0.7em" value="By #{addcommMB.currentPubl.autor.login} on #{addcommMB.currentPubl.date_publ.toLocaleString()}"/>
+                                <c:if test="#{publMB.admin}">
+                                    <h:outputText style="font-size:0.7em;float:right" value="#{addcommMB.currentPubl.visits} Visits"/>
+                                </c:if>
+                                <br/>
+                                <h:outputText escape="false" value="#{addcommMB.currentPubl.text}"/><br/>
+                            </h:form>
+                        </section>
+                        <section>
+                            <h:form prependId="false">
+                                <h:outputText style="font-size:1.2em; color:darkgrey" value="#{addcommMB.countComments} Comments"/><br/>
+                                <p:inputText  value="#{addcommMB.currComm.text}" disabled="#{addcommMB.register}"/>
+                                <p:commandButton action="#{addcommMB.addComment}" ajax="false" update="lst" value="Add comment" style="float: right; font-family: 'Yanone Kaffeesatz';" disabled="#{addcommMB.register}"/>
+                                <br/>
+                                <h:outputLabel rendered="#{addcommMB.register}" value="*You need to log in or register in order to submit comments" /><br/>
+                                <p:dataGrid value="#{addcommMB.lstComm}" var="comment" columns="1"
+                                            rows="5" paginator="false" id="lst">
+                                    <p:column>
 
-                                    <h:panelGrid columns="2" cellpadding="5">
-                                        <h:outputLabel for="firstname" value="First name:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
-                                        <p:inputText    
-                                            id="firstname" required="true" label="firstname" />
+                                        <h:outputLink value="newprofile.xhtml"><f:param name="id_user" value="#{comment.autor.id}"/>
+                                            <h:outputText style="float: left; color:orangered" value="#{comment.autor.login} on #{comment.datecomm.toLocaleString()}"/>
+                                        </h:outputLink>
+                                        <br/>
+                                        <h:outputText value="#{comment.text}"/>
+                                        <p:commandButton title="Delete"  ajax="false" update="@form" disabled="#{comment.autor.login!=userManagedBean.currentUser.login}" image="ui-icon-trash" action="#{addcommMB.delComment()}" style="float: right">
+                                            <f:setPropertyActionListener target="#{addcommMB.id_comm}" value="#{comment.id}" />
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataGrid>
+                            </h:form>
+                        </section>
 
-                                        <h:outputLabel for="lastname" value="Last name:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
-                                        <p:inputText    
-                                            id="lastname" required="true" label="lastname" />
+                    </div>
+                    <div class="3u">
 
-                                        <h:outputLabel for="email" value="E-mail:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
-                                        <p:inputText    
-                                            id="email" required="true" label="email" />
-
-                                        <h:outputLabel for="phone" value="Phone:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
-                                        <p:inputMask    
-                                            id="phone" required="true" label="phone" mask="(999) 999-9999" />
-
-                                        <h:outputLabel for="username" value="Username:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
-                                        <p:inputText    
-                                            id="username" required="true" label="username" />  
-
-                                        <h:outputLabel for="password" value="Password:" style="font-family: 'Yanone Kaffeesatz';" />  
-                                        <p:password id="password" required="true"/>  
-
-                                        <p:messages showDetail="true"/>
-
-                                        <p:captcha label="Captcha"/>
-
-                                        <p:commandButton id="regButton" value="Register" style="font-family: 'Yanone Kaffeesatz';" />  
-
-                                    </h:panelGrid>  
-
-                                </h:form>  
-                            </header>
+                        <!-- Sidebar -->
+                        <section>
+                            <h1>
+                                Top 10 news
+                            </h1>
+                        </section>
+                        <section>
+                            <h1>
+                                Top 10 training methods
+                            </h1>
+                        </section>
+                        <section>
+                            <h1>
+                                Top 10 diets
+                            </h1>
                         </section>
                     </div>
                 </div>

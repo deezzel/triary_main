@@ -40,5 +40,10 @@ public class ProductService extends Generic<Product> implements IProductService 
     public List<Product> getAll() {
         return (List<Product>) em.createNamedQuery("Product.findAll").getResultList();
     }
+
+    @Override
+    public byte[] getImage(Integer product_id) {
+        return (byte[]) em.createNamedQuery("Product.getImage").setParameter("product_id", product_id).getSingleResult();
+    }
     
 }

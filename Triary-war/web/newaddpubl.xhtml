@@ -23,6 +23,11 @@
                 top:10em;
                 left: 25em;                
             }
+            .ui-widget{
+                font-family: 'Yanone Kaffeesatz';
+                font-size: 1em
+            }
+            
         </style>
     </h:head>
     <h:body>
@@ -39,84 +44,94 @@
                     <nav>
                         <h:form>
                             <a href="newinndex.xhtml">Homepage</a>
-                            <a href="newpublications.xhtml">Publications</a>
-                            <c:if test="#{userManagedBean.currentUser==null}">
-                                <p:growl id="growl" showDetail="true" sticky="false" life="2000" />
-                                <p:commandLink ajax="true" update="growl" actionListener="#{mainMB.addWarn}">
-                                    <h:outputText style="font-family: 'Yanone Kaffeesatz'; value="Profile"/>
-                                </p:commandLink>                                
-                            </c:if>    
-                            <c:if test="#{userManagedBean.currentUser!=null}">
-                                <h:outputLink value="newprofile.xhtml">
-                                    <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
-                                    <h:outputText style="font-family: 'Yanone Kaffeesatz'; value="Profile"/>
-                                </h:outputLink>
-                            </c:if>
-                            <a href="market.xhtml">Market</a>
+                            <a style="font-weight:bold" href="newpublications.xhtml">News</a>
+                            <a style="font-weight:bold" href="newtrmethods.xhtml">Training Methods</a>
+                            <a style="font-weight:bold" href="newdiets.xhtml">Diets</a>
+                            <h:outputLink value="newprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText value="Profile"/></h:outputLink>
+                            <a href="twocolumn2.html">Market</a>
                             <c:if test="${userManagedBean.currentUser==null}">
                                 <h:outputLink style="font-weight:bold; font-size:1.8em" value="newlogin.xhtml" title="login">
                                     <h:outputText value="Sign in"/>
                                 </h:outputLink>
                             </c:if>
                             <c:if test="${userManagedBean.currentUser!=null}">
+
                                 <h:commandLink style="font-weight:bold; font-size:1.8em" action="#{userManagedBean.logout()}" title="logout">
                                     <h:outputText value="Sign out"/>
                                 </h:commandLink>
+
                             </c:if>
+
                         </h:form>
                     </nav>
 
                 </div>
             </header>
         </div>
-
         <!-- Content -->
         <div id="content-wrapper">
             <div id="content">
                 <div class="5grid">
-                    <div class="12u-first">
+                    <div class="9u-first">
 
                         <!-- Main Content -->
                         <section>
-                            <header style="text-align:center">
-                                <h2>Registration</h2>
-                                <h3>Fill the form with the necessary fields</h3>
-                                <h:form style="text-align:center; width:100%; margin-left: 22em">  
+                            <h:form id="form" style="font-family: 'Yanone Kaffeesatz';">
+                                <h:outputText style="font-size:1.5em" value="Type of the publication: " /> 
+                                <br />
+                                <p:selectOneMenu style="font-family: 'Yanone Kaffeesatz';" value="#{addpublMB.selectedItem}">
+                                    <f:selectItem itemLabel="Select One" itemValue="" />  
+                                    <f:selectItem itemLabel="News" itemValue="NEWS" />  
+                                    <f:selectItem itemLabel="Training method" itemValue="TRAININGMETHOD" />  
+                                    <f:selectItem itemLabel="Diet" itemValue="DIET" /> 
+                                </p:selectOneMenu>
+                                 
+                                <br/>
+                                <h:outputText value="#{addpublMB.selectedItem}"/>
+                                <br/>
+                                <h:outputText  value ="Title" style="float: left; font-size:1.5em" />
+                                <br/>
+                                <p:inputText id="Title" value ="#{addpublMB.currpubl.title}" style="float: left">
+                                    <f:validateLength minimum="2" />  
+                                </p:inputText>
 
-                                    <h:panelGrid columns="2" cellpadding="5">
-                                        <h:outputLabel for="firstname" value="First name:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
-                                        <p:inputText    
-                                            id="firstname" required="true" label="firstname" />
+                                <br></br>
+                                <br></br>
+                                <h:outputText value="There should be the text that will be displayed as preview" style="float:left; font-size:1.5em"/>
+                                <br />
+                                <p:inputTextarea value="#{addpublMB.currpubl.subtext}" cols="80" rows="5">
+                                    <f:validateLength minimum="2" />
+                                </p:inputTextarea>
+                                <br/>
+                                <h:outputText value ="Full text"   style="float: left; font-size:1.5em"/>
+                                <br></br>
+                                <p:inputTextarea value="#{addpublMB.currpubl.text}" cols="80" rows="10">
+                                    <f:validateLength minimum="2" />
+                                </p:inputTextarea>
+                                <br></br>
 
-                                        <h:outputLabel for="lastname" value="Last name:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
-                                        <p:inputText    
-                                            id="lastname" required="true" label="lastname" />
+                                <p:commandButton  value="Add new"  action="#{addpublMB.addPubl()}"/>
+                            </h:form>
+                        </section>
 
-                                        <h:outputLabel for="email" value="E-mail:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
-                                        <p:inputText    
-                                            id="email" required="true" label="email" />
+                    </div>
+                    <div class="3u">
 
-                                        <h:outputLabel for="phone" value="Phone:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
-                                        <p:inputMask    
-                                            id="phone" required="true" label="phone" mask="(999) 999-9999" />
-
-                                        <h:outputLabel for="username" value="Username:" style="font-family: 'Yanone Kaffeesatz';color:black;" />  
-                                        <p:inputText    
-                                            id="username" required="true" label="username" />  
-
-                                        <h:outputLabel for="password" value="Password:" style="font-family: 'Yanone Kaffeesatz';" />  
-                                        <p:password id="password" required="true"/>  
-
-                                        <p:messages showDetail="true"/>
-
-                                        <p:captcha label="Captcha"/>
-
-                                        <p:commandButton id="regButton" value="Register" style="font-family: 'Yanone Kaffeesatz';" />  
-
-                                    </h:panelGrid>  
-
-                                </h:form>  
-                            </header>
+                        <!-- Sidebar -->
+                        <section>
+                            <h1>
+                                Top 10 news
+                            </h1>
+                        </section>
+                        <section>
+                            <h1>
+                                Top 10 training methods
+                            </h1>
+                        </section>
+                        <section>
+                            <h1>
+                                Top 10 diets
+                            </h1>
                         </section>
                     </div>
                 </div>

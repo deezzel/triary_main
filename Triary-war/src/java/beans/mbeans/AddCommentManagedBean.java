@@ -43,6 +43,8 @@ public class AddCommentManagedBean {
     private String id_comm;
     private String id_news;
     private List<Comment> lstComm;
+    private Integer countComments;
+    private Integer visits;
     
     public AddCommentManagedBean(){}
 
@@ -165,8 +167,6 @@ public class AddCommentManagedBean {
         return false;
     }
     
-    
-    
     public void addComment() {
         currComm.setDatecomm(java.util.Calendar.getInstance().getTime());
         if (!currComm.getText().equals("")) {
@@ -196,11 +196,44 @@ public class AddCommentManagedBean {
         try {
             currentPubl = (Publication) publicationService.find(new Integer(id));
             lstComm = commentService.getByPublication(currentPubl);
+            countComments = commentService.countComments(currentPubl);
+            visits = publicationService.getVisits(id);
+            visits = visits+1;
+            currentPubl.setVisits(visits);
+            publicationService.edit(currentPubl);
             System.out.println(((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getQueryString());
             
         } catch (Exception e) {
             e.getStackTrace();
         }
+    }
+
+    /**
+     * @return the countComments
+     */
+    public Integer getCountComments() {        
+        return countComments;
+    }
+
+    /**
+     * @param countComments the countComments to set
+     */
+    public void setCountComments(Integer countComments) {
+        this.countComments = countComments;
+    }
+
+    /**
+     * @return the visits
+     */
+    public Integer getVisits() {
+        return visits;
+    }
+
+    /**
+     * @param visits the visits to set
+     */
+    public void setVisits(Integer visits) {
+        this.visits = visits;
     }
     
 }

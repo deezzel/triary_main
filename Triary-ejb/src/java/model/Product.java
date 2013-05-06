@@ -24,7 +24,9 @@ import model.baseclass.BaseEntity;
 @XmlRootElement
 @Table(name = "product", catalog = "triary", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")})
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
+    @NamedQuery(name = "Product.getImage", query = "SELECT p.image FROM Product p WHERE p.id = :product_id")
+})
 public class Product extends BaseEntity implements Serializable {
 
     @Column(name = "description", nullable = true, length = 1500)

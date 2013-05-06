@@ -87,31 +87,58 @@
                                 <h1>
                                     My diary
                                 </h1>
-                                <p:dataGrid value="#{diarylMB.lstDiary}" var="diary"  
-                                            paginator="true" 
-                                            paginatorPosition="bottom"
-                                            rows="5" 
-                                            effect="true" columns="1">
-                                    <p:column>
-                                        <p:panelGrid columns="6"> 
+                                <h:form id="diary-form">
+                                    <p:dataTable var="diary" value="#{diarylMB.lstDiary}" paginator="true" rows="10" paginatorPosition="bottom" editable="true">
+                                        <p:ajax event="rowEdit" listener="#{diarylMB.editRecord}" update="@this"/>
+                                        <p:ajax event="rowEditCancel"/>
+                                        <p:column style="width:7%" headerText="Type: ">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{diary.trainingType}"/></f:facet>
+                                                <f:facet name="input"><p:inputText maxlength="10" size="10" value="#{diary.trainingType}"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column style="width:7%" headerText="Muscle group: ">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{diary.muscleGroup}"/></f:facet>
+                                                <f:facet name="input"><p:inputText size="7" value="#{diary.muscleGroup}"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column style="width:7%" headerText="Excercise: ">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{diary.tasks}"/></f:facet>
+                                                <f:facet name="input"><p:inputText size="7" value="#{diary.tasks}"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column style="width:7%" headerText="Iterations: ">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{diary.trainingDuration}"/></f:facet>
+                                                <f:facet name="input"><p:inputText size="3" value="#{diary.trainingDuration}"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column style="width:7%" headerText="Repeats: ">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{diary.repeatAmount}"/></f:facet>
+                                                <f:facet name="input"><p:inputText size="4" value="#{diary.repeatAmount}"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column style="width:7%" headerText="Weight: ">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{diary.weight}"/></f:facet>
+                                                <f:facet name="input"><p:inputText size="4" value="#{diary.weight}"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column style="width:7%" headerText="Fillings: ">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{diary.fillings}"/></f:facet>
+                                                <f:facet name="input"><p:inputText size="10" value="#{diary.fillings}"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column style="width:6%">  
+                                            <p:rowEditor />  
+                                        </p:column>  
+                                    </p:dataTable>
 
-                                            <h:outputText value="Type: "/>   
-                                            <h:outputText value="#{diary.trainingType}" style="float: left" />                                  
-                                            <h:outputText value="Muscle group: "/>
-                                            <h:outputText value="#{diary.muscleGroup}" style="float: left" />
-                                            <h:outputText value="Number of iterations: "/>
-                                            <h:outputText value="#{diary.trainingDuration}" style="float: left" />
-                                            <h:outputText value="Number of repeats: "/>
-                                            <h:outputText value="#{diary.repeatAmount}" style="float: left" />
-                                            <h:outputText value="Weight of the equipment: "/>
-                                            <h:outputText value="#{diary.weight}" style="float: left" />
-                                            <h:outputText value="Fillings: "/>
-                                            <h:outputText value="#{diary.fillings}" style="float: left" />
-
-                                        </p:panelGrid>
-                                        <p:separator style="height: 5px"/>
-                                    </p:column>
-                                </p:dataGrid>
+                                </h:form>
                             </section>
                             <section>
                                 <h:form>
@@ -136,6 +163,9 @@
                                             <f:ajax render="@form"/>
                                         </p:selectOneListbox>
                                         <h:outputText value="Exercise: "/>
+                                        <p:selectOneListbox value="#{diarylMB.selectedItemTasks}" rendered="#{diarylMB.selectedItemMuscleGr==null}">
+                                            <f:selectItem itemLabel="Select muscle group" itemValue="select"/>
+                                        </p:selectOneListbox>
                                         <p:selectOneListbox value="#{diarylMB.selectedItemTasks}" rendered="#{diarylMB.selectedItemMuscleGr == 'chest'}">
                                             <f:selectItem itemLabel="Bench" itemValue="bench"/>
                                             <f:selectItem itemLabel="Wiring dumbbells" itemValue="wiring"/>
@@ -156,8 +186,8 @@
                                         <h:outputText value=""/>
                                         <!--third row-->
 
-                                        
-                                        
+
+
                                     </h:panelGrid>
                                     <h:outputLabel value="Fillings: "/><br/>
                                     <p:inputTextarea rows="10" cols="50" value="#{diarylMB.curDiary.fillings}"/><br/>
