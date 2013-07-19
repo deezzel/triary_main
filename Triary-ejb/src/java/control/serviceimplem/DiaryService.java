@@ -41,8 +41,8 @@ public class DiaryService extends Generic<Diary> implements IDiaryService{
     }
     
     @Override
-    public void addRecord(Users usr, String training_type, String muscle_gr,  String tasks, String tr_duration, Integer repeat_amount, String fillings) {
-            Diary diary = new Diary(training_type, muscle_gr, tasks, tr_duration, repeat_amount, fillings);
+    public void addRecord(Users usr, String training_type, String muscle_gr,  String tasks, String fillings) {
+            Diary diary = new Diary(training_type, muscle_gr, tasks, fillings);
             diary.setOwner(usr);
             create(diary);
     }

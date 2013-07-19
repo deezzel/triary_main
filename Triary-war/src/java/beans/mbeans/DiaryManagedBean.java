@@ -29,7 +29,7 @@ import org.primefaces.event.RowEditEvent;
  * @author kate
  */
 @ManagedBean(name = "diarylMB")
-@SessionScoped
+@ViewScoped
 public class DiaryManagedBean {
 
     private Diary curDiary = new Diary();
@@ -56,7 +56,32 @@ public class DiaryManagedBean {
     private String selectedItemSquats;
     private String selectedItemSwings;
     private Map<String, String> muscle_grs;
+    
+    private boolean attempt2;
+    private boolean attempt3;
+    private boolean attempt4;
+    private boolean attempt5;
+    private boolean attempt6;
+    private boolean attempt7;
+    
+    private String cnt_att1;
+    private String cnt_att2;
+    private String cnt_att3;
+    private String cnt_att4;
+    private String cnt_att5;
+    private String cnt_att6;
+    private String cnt_att7;
+    
+    private String w_at1;
+    private String w_at2;
+    private String w_at3;
+    private String w_at4;
+    private String w_at5;
+    private String w_at6;
+    private String w_at7;
 
+    public static String newline = System.getProperty("line.separator");
+    
     public DiaryManagedBean() {
         muscle_grs = new HashMap<String, String>();
         muscle_grs.put("Neck", "Neck");
@@ -115,14 +140,30 @@ public class DiaryManagedBean {
     public void addRecord() {
 //        selectedItem = this.getSelectedItem();
 //        String selectedLabel = items.get(selectedItem);
-
-
-
+        String atts = "1. "+ cnt_att1+"/"+w_at1+";" + newline;
+        if (null != cnt_att2 && null != w_at2){
+            atts = atts + "2. "+cnt_att2+"/"+w_at2+";"+ newline;
+        }
+        if (null != cnt_att3 && null != w_at3){
+            atts = atts + "3. "+cnt_att3+"/"+w_at3+";"+ newline;
+        }
+        if (null != cnt_att4 && null != w_at4){
+            atts = atts + "4. "+cnt_att4+"/"+w_at4+";"+ newline;
+        }
+        if (null != cnt_att5 && null !=w_at5){
+            atts = atts + "5. "+cnt_att5+"/"+w_at5+";"+ newline;
+        }
+        if (null != cnt_att6 && null !=w_at6){
+            atts = atts + "6. "+cnt_att6+"/"+w_at6+";"+ newline;
+        }
+        if (null != cnt_att7 && null !=w_at7){
+            atts = atts + "7. "+cnt_att7+"/"+w_at7+";"+ newline;
+        }
         curDiary.setMuscleGroup(selectedItemMuscleGr);
-
         curDiary.setTrainingType(selectedItemType);
         curDiary.setTasks(selectedItemTasks);
         curDiary.setOwner(usrMB.getCurrentUser());
+        curDiary.setAttempts(atts);
         diaryService.create(curDiary);
 //        try {
         //FacesContext.getCurrentInstance().getExternalContext().redirect(".");
@@ -395,5 +436,309 @@ public class DiaryManagedBean {
      */
     public void setMuscle_grs(Map<String, String> muscle_grs) {
         this.muscle_grs = muscle_grs;
+    }
+
+    /**
+     * @return the attempt2
+     */
+    public boolean isAttempt2() {
+        return attempt2;
+    }
+
+    /**
+     * @param attempt2 the attempt2 to set
+     */
+    public void setAttempt2(boolean attempt2) {
+        this.attempt2 = attempt2;
+    }
+
+    /**
+     * @return the attempt3
+     */
+    public boolean isAttempt3() {
+        return attempt3;
+    }
+
+    /**
+     * @param attempt3 the attempt3 to set
+     */
+    public void setAttempt3(boolean attempt3) {
+        this.attempt3 = attempt3;
+    }
+
+    /**
+     * @return the attempt4
+     */
+    public boolean isAttempt4() {
+        return attempt4;
+    }
+
+    /**
+     * @param attempt4 the attempt4 to set
+     */
+    public void setAttempt4(boolean attempt4) {
+        this.attempt4 = attempt4;
+    }
+
+    /**
+     * @return the attempt5
+     */
+    public boolean isAttempt5() {
+        return attempt5;
+    }
+
+    /**
+     * @param attempt5 the attempt5 to set
+     */
+    public void setAttempt5(boolean attempt5) {
+        this.attempt5 = attempt5;
+    }
+
+    /**
+     * @return the attempt6
+     */
+    public boolean isAttempt6() {
+        return attempt6;
+    }
+
+    /**
+     * @param attempt6 the attempt6 to set
+     */
+    public void setAttempt6(boolean attempt6) {
+        this.attempt6 = attempt6;
+    }
+
+    /**
+     * @return the attempt7
+     */
+    public boolean isAttempt7() {
+        return attempt7;
+    }
+
+    /**
+     * @param attempt7 the attempt7 to set
+     */
+    public void setAttempt7(boolean attempt7) {
+        this.attempt7 = attempt7;
+    }
+    
+    public void setAttempt2Visible(){
+        attempt2 =true;
+    }
+    
+    public void setAttempt3Visible(){
+        attempt3 =true;
+    }
+    
+    public void setAttempt4Visible(){
+        attempt4 =true;
+    }
+    
+    public void setAttempt5Visible(){
+        attempt5 =true;
+    }
+    
+    public void setAttempt6Visible(){
+        attempt6 =true;
+    }
+    
+    public void setAttempt7Visible(){
+        attempt7 =true;
+    }
+
+    /**
+     * @return the cnt_att1
+     */
+    public String getCnt_att1() {
+        return cnt_att1;
+    }
+
+    /**
+     * @param cnt_att1 the cnt_att1 to set
+     */
+    public void setCnt_att1(String cnt_att1) {
+        this.cnt_att1 = cnt_att1;
+    }
+
+    /**
+     * @return the cnt_att2
+     */
+    public String getCnt_att2() {
+        return cnt_att2;
+    }
+
+    /**
+     * @param cnt_att2 the cnt_att2 to set
+     */
+    public void setCnt_att2(String cnt_att2) {
+        this.cnt_att2 = cnt_att2;
+    }
+
+    /**
+     * @return the cnt_att3
+     */
+    public String getCnt_att3() {
+        return cnt_att3;
+    }
+
+    /**
+     * @param cnt_att3 the cnt_att3 to set
+     */
+    public void setCnt_att3(String cnt_att3) {
+        this.cnt_att3 = cnt_att3;
+    }
+
+    /**
+     * @return the cnt_att4
+     */
+    public String getCnt_att4() {
+        return cnt_att4;
+    }
+
+    /**
+     * @param cnt_att4 the cnt_att4 to set
+     */
+    public void setCnt_att4(String cnt_att4) {
+        this.cnt_att4 = cnt_att4;
+    }
+
+    /**
+     * @return the cnt_att5
+     */
+    public String getCnt_att5() {
+        return cnt_att5;
+    }
+
+    /**
+     * @param cnt_att5 the cnt_att5 to set
+     */
+    public void setCnt_att5(String cnt_att5) {
+        this.cnt_att5 = cnt_att5;
+    }
+
+    /**
+     * @return the cnt_att6
+     */
+    public String getCnt_att6() {
+        return cnt_att6;
+    }
+
+    /**
+     * @param cnt_att6 the cnt_att6 to set
+     */
+    public void setCnt_att6(String cnt_att6) {
+        this.cnt_att6 = cnt_att6;
+    }
+
+    /**
+     * @return the cnt_att7
+     */
+    public String getCnt_att7() {
+        return cnt_att7;
+    }
+
+    /**
+     * @param cnt_att7 the cnt_att7 to set
+     */
+    public void setCnt_att7(String cnt_att7) {
+        this.cnt_att7 = cnt_att7;
+    }
+
+    /**
+     * @return the w_at1
+     */
+    public String getW_at1() {
+        return w_at1;
+    }
+
+    /**
+     * @param w_at1 the w_at1 to set
+     */
+    public void setW_at1(String w_at1) {
+        this.w_at1 = w_at1;
+    }
+
+    /**
+     * @return the w_at2
+     */
+    public String getW_at2() {
+        return w_at2;
+    }
+
+    /**
+     * @param w_at2 the w_at2 to set
+     */
+    public void setW_at2(String w_at2) {
+        this.w_at2 = w_at2;
+    }
+
+    /**
+     * @return the w_at3
+     */
+    public String getW_at3() {
+        return w_at3;
+    }
+
+    /**
+     * @param w_at3 the w_at3 to set
+     */
+    public void setW_at3(String w_at3) {
+        this.w_at3 = w_at3;
+    }
+
+    /**
+     * @return the w_at4
+     */
+    public String getW_at4() {
+        return w_at4;
+    }
+
+    /**
+     * @param w_at4 the w_at4 to set
+     */
+    public void setW_at4(String w_at4) {
+        this.w_at4 = w_at4;
+    }
+
+    /**
+     * @return the w_at5
+     */
+    public String getW_at5() {
+        return w_at5;
+    }
+
+    /**
+     * @param w_at5 the w_at5 to set
+     */
+    public void setW_at5(String w_at5) {
+        this.w_at5 = w_at5;
+    }
+
+    /**
+     * @return the w_at6
+     */
+    public String getW_at6() {
+        return w_at6;
+    }
+
+    /**
+     * @param w_at6 the w_at6 to set
+     */
+    public void setW_at6(String w_at6) {
+        this.w_at6 = w_at6;
+    }
+
+    /**
+     * @return the w_at7
+     */
+    public String getW_at7() {
+        return w_at7;
+    }
+
+    /**
+     * @param w_at7 the w_at7 to set
+     */
+    public void setW_at7(String w_at7) {
+        this.w_at7 = w_at7;
     }
 }

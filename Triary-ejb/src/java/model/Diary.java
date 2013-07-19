@@ -42,14 +42,8 @@ public class Diary extends BaseEntity implements Serializable {
     private String training_type;
     @Column(name = "muscle_gr", nullable = true, length = 255)
     private String muscle_gr;
-    @Column(name = "weight", nullable = true, length = 255)
-    private String weight;
     @Column(name = "tasks", nullable = true, length = 255)
     private String tasks;
-    @Column(name = "tr_duration", nullable = true, length = 255)
-    private String tr_duration;
-    @Column(name = "repeat_amount", nullable = true, length = 255)
-    private Integer repeat_amount;
     @Column(name = "fillings", nullable = true, length = 255)
     private String fillings;
     @Column(name = "attempts", nullable = true, length = 255)
@@ -63,13 +57,12 @@ public class Diary extends BaseEntity implements Serializable {
     public Diary() {
     }
 
-    public Diary(String training_type, String muscle_gr, String tasks, String tr_duration, Integer repeat_amount, String fillings) {
+    public Diary(String training_type, String muscle_gr, String tasks, String fillings) {
         this.training_type = training_type;
         this.muscle_gr = muscle_gr;
         this.fillings = fillings;
         this.tasks = tasks;
-        this.tr_duration = tr_duration;
-        this.repeat_amount = repeat_amount;
+        
     }
 
     public void addComment(Comment comm) {
@@ -100,14 +93,6 @@ public class Diary extends BaseEntity implements Serializable {
         this.muscle_gr = muscle_gr;
     }
 
-    public String getWeight() {
-        return weight;
-    }
-
-    public void setWeight(String weight) {
-        this.weight = weight;
-    }
-
     public String getTasks() {
         return tasks;
     }
@@ -122,22 +107,6 @@ public class Diary extends BaseEntity implements Serializable {
 
     public void setFillings(String fillings) {
         this.fillings = fillings;
-    }
-
-    public String getTrainingDuration() {
-        return tr_duration;
-    }
-
-    public void setTrainingDuration(String tr_duration) {
-        this.tr_duration = tr_duration;
-    }
-
-    public Integer getRepeatAmount() {
-        return repeat_amount;
-    }
-
-    public void setRepeatAmount(Integer repeat_amount) {
-        this.repeat_amount = repeat_amount;
     }
 
     public void setOwner(Users owner) {
