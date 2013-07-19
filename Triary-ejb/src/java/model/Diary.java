@@ -52,6 +52,8 @@ public class Diary extends BaseEntity implements Serializable {
     private Integer repeat_amount;
     @Column(name = "fillings", nullable = true, length = 255)
     private String fillings;
+    @Column(name = "attempts", nullable = true, length = 255)
+    private String attempts;
     @OneToMany(mappedBy = "diary", cascade={CascadeType.ALL})
     private List<Comment> commentList;
     @ManyToOne
@@ -153,5 +155,19 @@ public class Diary extends BaseEntity implements Serializable {
 
     public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
+    }
+
+    /**
+     * @return the attempts
+     */
+    public String getAttempts() {
+        return attempts;
+    }
+
+    /**
+     * @param attempts the attempts to set
+     */
+    public void setAttempts(String attempts) {
+        this.attempts = attempts;
     }
 }

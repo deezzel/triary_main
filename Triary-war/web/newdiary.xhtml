@@ -6,7 +6,8 @@
     xmlns:f="http://java.sun.com/jsf/core"  
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="http://java.sun.com/jsp/jstl/core"
-    >
+    
+    xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Triary (homepage)</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -16,6 +17,21 @@
         <link rel="stylesheet" href="css/style.css" />
         <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+        <style type="text/css">
+            .ui-growl{
+                font-family: 'Yanone Kaffeesatz';
+                position: absolute;
+                top:10em;
+                left: 25em;  
+
+            }
+            .ui-selectonemenu-items{
+                font-family: 'Yanone Kaffeesatz';
+                color:black;
+                background-image: none;
+                background-color: white;
+            }
+        </style>
     </h:head>
     <h:body>
 
@@ -82,18 +98,88 @@
                                 </p:menuitem>
 
                             </p:breadCrumb>
-
                             <section>
                                 <h1>
                                     My diary
                                 </h1>
+                                <h:form id="main_diary_form">
+                                    <h:panelGrid columns="8" style="margin-bottom:10px" cellpadding="15" cellspacing="15" width="800px">
+
+                                        <!--first row-->
+                                        <h:outputText value="Training type:    "/>
+                                        <p:selectOneMenu value="#{diarylMB.selectedItemType}">
+                                            <f:selectItem itemLabel="Select one" itemValue="" />
+                                            <f:selectItem itemLabel="Bodybuilding" itemValue="bodybuilding" />
+                                            <f:selectItem itemLabel="Fitnes" itemValue="fitnes" />
+                                            <f:selectItem itemLabel="Powerlifting" itemValue="powerlifting" />
+                                            <f:ajax render="@form"/>
+                                        </p:selectOneMenu>
+                                        <h:outputText value="Muscle group: "/>
+                                        <p:selectOneMenu value="#{diarylMB.selectedItemMuscleGr}">
+                                            <f:selectItem itemLabel="Select one" itemValue="" />
+                                            <f:selectItem itemLabel="Neck" itemValue="neck" />
+                                            <f:selectItem itemLabel="Back" itemValue="back" />
+                                            <f:selectItem itemLabel="Arms" itemValue="arms" />
+                                            <f:selectItem itemLabel="Pres" itemValue="pres" />
+                                            <f:selectItem itemLabel="Legs" itemValue="legs" />
+                                            <f:selectItem itemLabel="Chest" itemValue="chest" />
+                                            <f:ajax render="@form"/>
+                                        </p:selectOneMenu>
+                                        <h:outputText value="Exercise: "/>
+                                        <p:selectOneMenu value="#{diarylMB.selectedItemTasks}" rendered="#{diarylMB.selectedItemMuscleGr==null}">
+                                            <f:selectItem itemLabel="Select muscle group" itemValue="select"/>
+                                        </p:selectOneMenu>
+                                        <p:selectOneMenu value="#{diarylMB.selectedItemTasks}" rendered="#{diarylMB.selectedItemMuscleGr == 'chest'}">
+                                            <f:selectItem itemLabel="Select one" itemValue="" />
+                                            <f:selectItem itemLabel="Bench" itemValue="bench"/>
+                                            <f:selectItem itemLabel="Wiring dumbbells" itemValue="wiring"/>
+                                        </p:selectOneMenu>
+                                        <p:selectOneMenu value="#{diarylMB.selectedItemTasks}" rendered="#{diarylMB.selectedItemMuscleGr == 'back'}">
+                                            <f:selectItem itemLabel="Select one" itemValue="" />
+                                            <f:selectItem itemLabel="Dead lift" itemValue="dead_lift"/>
+                                        </p:selectOneMenu>
+                                        <h:outputText value=""/>
+                                    </h:panelGrid>
+                                    <br/>
+                                    <h:panelGrid columns="8" style="margin-bottom:10px" cellpadding="15" cellspacing="15" width="800px">
+                                        <!--third row-->
+                                        <h:outputLabel for="minmax" value="Number of attempts: " />  
+                                        <p:spinner id="minmax" value="#{diarylMB.curDiary.trainingDuration}" min="0" max="100" size="5"/>
+                                        <h:outputLabel for="rep" value="Number of repeats: " />  
+                                        <p:spinner id="rep" value="#{diarylMB.curDiary.repeatAmount}" min="0" max="100" size="5"/>
+                                        <h:outputLabel for="ves" value="Weight of equipment: " />  
+                                        <p:spinner id="ves" value="#{diarylMB.curDiary.weight}" min="0" max="500" size="5"/>
+                                        <h:outputText value=""/>
+                                    </h:panelGrid>
+                                    <h:outputText value="Подходы" style="font-family: 'Open Sans Condensed'"/><br/>
+                                    <h:panelGrid columns="5" width="250px" id="grid_attempts">
+                                        <h:form id="form_attempts">
+                                            <h:outputText value="1. " style="font-family: 'Open Sans Condensed'"/>
+                                            <p:inputText size="3" value="#{diarylMB.cnt_att1}"/>/<p:inputText size="3" value="#{diarylMB.w_at1}"/>
+                                            <p:commandButton id="first_attempt" image="ui-icon-plus" actionListener="#{diarylMB.setAttempt2Visible()}" update=":main_diary_form"/><br/>
+
+                                            <h:outputText id="att2_out_text" rendered="#{diarylMB.attempt2}" value="2. " style="font-family: 'Open Sans Condensed'"/>
+                                            <p:inputText id="att2_cnt_input" rendered="#{diarylMB.attempt2}" size="3" value="#{diarylMB.cnt_att2}"/><h:outputText id="att2_slash" rendered="#{diarylMB.attempt2}" value="/"/><p:inputText id="att2_w_input" rendered="#{diarylMB.attempt2}" size="3" value="#{diarylMB.w_at2}"/>
+                                            <p:commandButton id="second_attempt" image="ui-icon-plus" rendered="#{diarylMB.attempt2}" action="#{diarylMB.setAttempt3Visible()}" update=":main_diary_form"/><br/>
+
+                                            <h:outputText rendered="#{diarylMB.attempt3}" value="3. " style="font-family: 'Open Sans Condensed'"/>
+                                            <p:inputText rendered="#{diarylMB.attempt3}" size="3" value="#{diarylMB.cnt_att3}"/><h:outputText rendered="#{diarylMB.attempt3}" value="/"/><p:inputText rendered="#{diarylMB.attempt3}" size="3" value="#{diarylMB.w_at3}"/>
+                                            <p:commandButton id="third_attempt" image="ui-icon-plus" rendered="#{diarylMB.attempt3}" action="#{diarylMB.setAttempt4Visible()}" update=":main_diary_form"/><br/>
+                                        </h:form>
+                                    </h:panelGrid>
+                                    <h:outputLabel value="Fillings: "/><br/>
+                                    <p:inputTextarea rows="5" cols="30" value="#{diarylMB.curDiary.fillings}"/><br/>
+                                    <p:commandButton style="font-family: 'Yanone Kaffeesatz';" value="Add record" action="#{diarylMB.addRecord()}" update=":main_diary_form"/>
+                                </h:form>
+                            </section>
+                            <section>
                                 <h:form id="diary-form">
                                     <p:dataTable var="diary" value="#{diarylMB.lstDiary}" paginator="true" rows="10" paginatorPosition="bottom" editable="true">
                                         <p:ajax event="rowEdit" listener="#{diarylMB.editRecord}" update="@this"/>
                                         <p:ajax event="rowEditCancel"/>
                                         <p:column style="width:7%" headerText="Type: ">
                                             <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{diary.trainingType}"/></f:facet>
+                                                <f:facet name="output"><h:outputText escape="false" style="white-space:pre-line;" value="#{diary.trainingType}"/></f:facet>
                                                 <f:facet name="input"><p:inputText maxlength="10" size="10" value="#{diary.trainingType}"/></f:facet>
                                             </p:cellEditor>
                                         </p:column>
@@ -109,24 +195,28 @@
                                                 <f:facet name="input"><p:inputText size="7" value="#{diary.tasks}"/></f:facet>
                                             </p:cellEditor>
                                         </p:column>
-                                        <p:column style="width:7%" headerText="Iterations: ">
+                                        <p:column style="width:14%; font-family: 'Open Sans Condensed'" headerText="Подходы (раз/вес): ">
                                             <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{diary.trainingDuration}"/></f:facet>
+                                                <f:facet name="output">
+                                                    <ui:repeat value="#{diary.attempts.split(';')}" var="attempt">
+                                                        <h:outputText escape="false" style="white-space:pre-line;" value="#{attempt}"/>
+                                                    </ui:repeat>
+                                                </f:facet>
                                                 <f:facet name="input"><p:inputText size="3" value="#{diary.trainingDuration}"/></f:facet>
                                             </p:cellEditor>
                                         </p:column>
-                                        <p:column style="width:7%" headerText="Repeats: ">
+<!--                                        <p:column style="width:7%" headerText="Repeats: ">
                                             <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{diary.repeatAmount}"/></f:facet>
-                                                <f:facet name="input"><p:inputText size="4" value="#{diary.repeatAmount}"/></f:facet>
+                                                <f:facet name="output"><h:outputText value="{diary.repeatAmount}"/></f:facet>
+                                                <f:facet name="input"><p:inputText size="4" value="{diary.repeatAmount}"/></f:facet>
                                             </p:cellEditor>
                                         </p:column>
                                         <p:column style="width:7%" headerText="Weight: ">
                                             <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{diary.weight}"/></f:facet>
-                                                <f:facet name="input"><p:inputText size="4" value="#{diary.weight}"/></f:facet>
+                                                <f:facet name="output"><h:outputText value="{diary.weight}"/></f:facet>
+                                                <f:facet name="input"><p:inputText size="4" value="{diary.weight}"/></f:facet>
                                             </p:cellEditor>
-                                        </p:column>
+                                        </p:column>-->
                                         <p:column style="width:7%" headerText="Fillings: ">
                                             <p:cellEditor>
                                                 <f:facet name="output"><h:outputText value="#{diary.fillings}"/></f:facet>
@@ -140,60 +230,7 @@
 
                                 </h:form>
                             </section>
-                            <section>
-                                <h:form>
-                                    <h:panelGrid columns="8" style="margin-bottom:10px" cellpadding="5" cellspacing="3" >
 
-                                        <!--first row-->
-                                        <h:outputText value="Training type:    " />
-                                        <p:selectOneListbox value="#{diarylMB.selectedItemType}" >
-                                            <f:selectItem itemLabel="Bodybuilding" itemValue="bodybuilding" />
-                                            <f:selectItem itemLabel="Fitnes" itemValue="fitnes" />
-                                            <f:selectItem itemLabel="Powerlifting" itemValue="powerlifting" />
-                                            <f:ajax render="@form"/>
-                                        </p:selectOneListbox>
-                                        <h:outputText value="Muscle group: "/>
-                                        <p:selectOneListbox value="#{diarylMB.selectedItemMuscleGr}">
-                                            <f:selectItem itemLabel="Neck" itemValue="neck" />
-                                            <f:selectItem itemLabel="Back" itemValue="back" />
-                                            <f:selectItem itemLabel="Arms" itemValue="arms" />
-                                            <f:selectItem itemLabel="Pres" itemValue="pres" />
-                                            <f:selectItem itemLabel="Legs" itemValue="legs" />
-                                            <f:selectItem itemLabel="Chest" itemValue="chest" />
-                                            <f:ajax render="@form"/>
-                                        </p:selectOneListbox>
-                                        <h:outputText value="Exercise: "/>
-                                        <p:selectOneListbox value="#{diarylMB.selectedItemTasks}" rendered="#{diarylMB.selectedItemMuscleGr==null}">
-                                            <f:selectItem itemLabel="Select muscle group" itemValue="select"/>
-                                        </p:selectOneListbox>
-                                        <p:selectOneListbox value="#{diarylMB.selectedItemTasks}" rendered="#{diarylMB.selectedItemMuscleGr == 'chest'}">
-                                            <f:selectItem itemLabel="Bench" itemValue="bench"/>
-                                            <f:selectItem itemLabel="Wiring dumbbells" itemValue="wiring"/>
-                                        </p:selectOneListbox>
-                                        <p:selectOneListbox value="#{diarylMB.selectedItemTasks}" rendered="#{diarylMB.selectedItemMuscleGr == 'back'}">
-                                            <f:selectItem itemLabel="Dead lift" itemValue="dead_lift"/>
-                                        </p:selectOneListbox>
-                                        <h:outputText value=""/>
-
-
-                                        <!--second row-->
-                                        <h:outputLabel for="minmax" value="Number of attempts: " />  
-                                        <p:spinner id="minmax" value="#{diarylMB.curDiary.trainingDuration}" min="0" max="100" size="5"/>
-                                        <h:outputLabel for="rep" value="Number of repeats: " />  
-                                        <p:spinner id="rep" value="#{diarylMB.curDiary.repeatAmount}" min="0" max="100" size="5"/>
-                                        <h:outputLabel for="ves" value="Weight of equipment: " />  
-                                        <p:spinner required="true" id="ves" value="#{diarylMB.curDiary.weight}" min="0" max="500" size="5"/>
-                                        <h:outputText value=""/>
-                                        <!--third row-->
-
-
-
-                                    </h:panelGrid>
-                                    <h:outputLabel value="Fillings: "/><br/>
-                                    <p:inputTextarea rows="10" cols="50" value="#{diarylMB.curDiary.fillings}"/><br/>
-                                    <p:commandButton value="Add record" action="#{diarylMB.addRecord()}"/>
-                                </h:form>
-                            </section>
                         </section>
 
                     </div>
