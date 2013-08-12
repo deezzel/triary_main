@@ -21,7 +21,8 @@
                 font-family: 'Yanone Kaffeesatz';
                 position: absolute;
                 top:10em;
-                left: 25em;                
+                left: 25em;  
+                
             }
         </style>
     </h:head>
@@ -45,13 +46,13 @@
                             <c:if test="#{userManagedBean.currentUser==null}">
                                 <p:growl id="growl" showDetail="true" sticky="false" life="2000" />
                                 <p:commandLink ajax="true" update="growl" actionListener="#{mainMB.addWarn}">
-                                    <h:outputText value="Profile"/>
+                                    <h:outputText style="font-family: 'Yanone Kaffeesatz';" value="Profile"/>
                                 </p:commandLink>                                
                             </c:if>    
                             <c:if test="#{userManagedBean.currentUser!=null}">
                             <h:outputLink value="newprofile.xhtml">
                                 <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
-                                <h:outputText value="Profile"/>
+                                <h:outputText style="font-family: 'Yanone Kaffeesatz';" value="Profile"/>
                             </h:outputLink>
                             </c:if>
                             <c:if test="#{mainMB.currentPage=='market'}">
@@ -84,22 +85,28 @@
                         <section>
                             <h:form id="product-form">
                                 <p:dataGrid var="product" value="#{marketMB.lstProducts}" columns="3"  
-                                            rows="12" paginator="true" paginatorPosition="bottom">
-                                    <p:panel header="#{product.name}" style="text-align:center">
-                                        <h:panelGrid columns="1" style="width:100%">  
-                                            <h:graphicImage value="ImageDisplay?product_id=#{product.id}" width="150px" height="150px"/>   
+                                            rows="12" paginator="true" paginatorPosition="bottom" >
+                                    <p:panel header="#{product.name}" style="text-align:left" >
+                                        <h:panelGrid columns="1" width="150em">
+                                            
+                                            <h:graphicImage value="ImageDisplay?product_id=#{product.id}"/>   
 
-                                            <h:outputText value="#{product.description}" />  
+                                            <h:outputText value="#{product.shortdesc}" />
+                                            <h:outputText style="color:orangered; font-weight:bolder; text-align:right" value="#{product.price} UAH"/>
+                                            <br/>
+                                            <p:rating value="#{product.rating}" readonly="true"/>
+                                            <h:outputLink  value="productdetails.xhtml">
+                                                <f:param name="id_prod" value="#{product.id}"/>
 
-                                            <p:commandLink ajax="true" update=":product-form:productDetail" oncomplete="productDialog.show()" title="View Detail">  
-                                                <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
-                                                <f:setPropertyActionListener value="#{product}"   
-                                                                             target="#{marketMB.selectedProduct}" />  
-                                            </p:commandLink>  
+                                                <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;"/>
+                                            </h:outputLink>
+                                            
                                         </h:panelGrid>  
                                     </p:panel>
                                 </p:dataGrid>
-
+                                <c:if test="${publMB.admin}">
+                                    <p:button title="Add product" outcome="newaddproduct" value="Add product" image="ui-icon-plus" style="font-family: 'Yanone Kaffeesatz';"/>
+                                </c:if>
                                 <p:dialog header="Product Detail" widgetVar="productDialog" modal="true">  
                                     <p:outputPanel id="productDetail" style="text-align:center;" layout="block">  
 

@@ -1,11 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,300,200);
 @import url(http://fonts.googleapis.com/css?family=Lobster);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=cyrillic);
 
-/*
-	Halcyonic 1.0 by nodethirtythree + FCT
-	http://nodethirtythree.com | @nodethirtythree
-	Released under the Creative Commons Attribution 3.0 license (nodethirtythree.com/license)
-*/
 
 /*********************************************************************************/
 /* Global                                                                        */
@@ -22,7 +18,7 @@
 		{
 			color: #474f51;
 			font-size: 13.5pt;
-			font-family: 'Yanone Kaffeesatz';
+			font-family: 'Open Sans Condensed', sans-serif;
 			line-height: 1.2em;
 			font-weight: 300;
 		}
@@ -49,7 +45,7 @@
 
 	/* Multi-use */
         .warn-message{
-            font-family: 'Yanone Kaffeesatz';
+            font-family: 'Open Sans Condensed', sans-serif;
         }
 
 		.link-list
@@ -311,7 +307,7 @@
                                     color: #c6c8c8;
 						text-decoration: none;
 						font-size: 1.4em;
-						margin-left: 60px;
+						margin-left: 25px;
 						outline: 0;
                                 }
 					#header nav a
@@ -386,9 +382,9 @@
 				#content section
 				{
 					background: #fff;
-					padding: 40px 30px 45px 30px;
+					padding: 20px 20px 25px 20px;
 					box-shadow: 2px 2px 2px 1px rgba(128,128,128,0.1);
-					margin: 0 0 5% 0;
+					margin: 0 0 2% 0;
                                         
 				}
                                
@@ -402,16 +398,16 @@
                                 #content div
                                 {
                                     border: none;
-                                    background-image: none;
-                                    background-color: transparent;
-                                    font-family: 'Yanone Kaffeesatz';
+/*                                    background-image: none;
+                                    background-color: transparent;*/
+                                    font-family: 'Open Sans Condensed', sans-serif;
                                 }
                                 
                                 #content table tr
                                 {
                                     border: none;
-                                    background-color: transparent;
-                                    font-family: 'Yanone Kaffeesatz';
+/*                                    background-color: transparent;*/
+                                    font-family: 'Open Sans Condensed', sans-serif;
                                     background-image: none;
                                     padding-left: 1.5em;
                                     padding-right: 1.5em;
@@ -447,11 +443,19 @@
                                 
                                 #content table tr
                                 {
-                                    background-color: white;
+                                    /*background-color: white;*/
                                     border-color: white;
                                     color: black;
                                     border: 0px;
                                 }
+                #contact-form
+                {
+                    
+                }
+                        #contact-form div
+                        {
+                            font-family: 'Open Sans Condensed', sans-serif;
+                        }
 
 		/* Footer */
 

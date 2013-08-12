@@ -65,8 +65,7 @@ public class Statistics extends BaseEntity implements Serializable {
         List<String> repeats = null;
         List<String> weights = null;
         Diary diary = null;
-        repeats.add(diary.getRepeatAmount().toString());
-        weights.add(diary.getWeight().toString()); 
+        
         
         hm.put(repeats, weights);
         return hm;

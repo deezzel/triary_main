@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+
+<html
+    xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    >
+    <h:head>
+        <title>Triary (homepage)</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <!--5grid--><script src="css/5grid/viewport.js"></script><!--[if lt IE 9]><script src="css/5grid/ie.js"></script><![endif]--><link rel="stylesheet" href="css/5grid/responsive.css" /><!--/5grid-->
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
+        <!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+        <style type="text/css">
+
+            .button
+            {
+                display: inline-block;
+                background: #555555;
+                color:black;
+                text-decoration: none;
+
+                outline: 0;
+                border-radius: 10px;
+                /*box-shadow: inset 0px 0px 0px 1px rgba(255,96,96,0.65), 3px 3px 3px 1px rgba(0,0,0,0.15);*/
+                background-image: -moz-linear-gradient(top, #ed391b, #ce1a00);
+                background-image: -webkit-linear-gradient(top, #ed391b, #ce1a00);
+                background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ed391b), to(#ce1a00));
+                background-image: -ms-linear-gradient(top, #ed391b, #ce1a00);
+                background-image: -o-linear-gradient(top, #ed391b, #ce1a00);
+                background-image: linear-gradient(top, #ed391b, #ce1a00);
+
+
+            }
+        </style>
+    </h:head>
+    <h:body>
+
+        <!-- Header -->
+        <div id="header-wrapper">
+            <header id="header" class="5grid">
+                <div class="12u-first">
+
+                    <!-- Logo -->
+                    <h1><a href="newinndex.xhtml">Triary</a></h1>
+
+                    <!-- Nav -->
+                    <nav>
+                        <h:form>
+                            <a href="newinndex.xhtml">Homepage</a>
+                            <a style="font-weight:bold" href="newpublications.xhtml">News</a>
+                            <a style="font-weight:bold" href="newtrmethods.xhtml">Training Methods</a>
+                            <a style="font-weight:bold" href="newdiets.xhtml">Diets</a>
+                            <c:if test="#{mainMB.currentPage=='profile'}">
+                                <h:outputLink value="newprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText style="color:red" value="Profile"/></h:outputLink>
+                            </c:if>
+                            <a href="market.xhtml">Market</a>
+                            <c:if test="${userManagedBean.currentUser==null}">
+                                <h:outputLink style="font-weight:bold; font-size:1.8em" value="newlogin.xhtml" title="login">
+                                    <h:outputText value="Sign in"/>
+                                </h:outputLink>
+                            </c:if>
+                            <c:if test="${userManagedBean.currentUser!=null}">
+
+                                <h:commandLink style="font-weight:bold; font-size:1.8em" action="#{userManagedBean.logout()}" title="logout">
+                                    <h:outputText value="Sign out"/>
+                                </h:commandLink>
+
+                            </c:if>
+
+                        </h:form>
+                    </nav>
+
+                </div>
+            </header>
+        </div>
+        <!-- Content -->
+        <div id="content-wrapper">
+            <div id="content">
+                <div class="5grid">
+                    <div class="9u-first">
+
+                        <!-- Main Content -->
+                        <section>
+                            <div class="ui-messages-info ui-corner-all">
+                                <span class="ui-messages-info-icon"/>
+                                <ul>
+                                    <li>
+                                        <span class="ui-messages-info-summary" style="text-align:center">Thank you for your purchase</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h:form id="contact-form">
+                                <h:outputText value="Please confirm if we can use the data from your profile to contact you:"/>
+                                <p:panel>
+                                    <h:panelGrid columns="2" cellpadding="15" width="30%">
+                                        <h:outputText value="Name: " style="font-weight:600"/>
+                                        <h:outputText value="#{userManagedBean.currentUser.name}"/>
+
+                                        <h:outputText value="Surname: " style="font-weight:600"/>
+                                        <h:outputText value="#{userManagedBean.currentUser.surName}"/>
+
+                                        <h:outputText value="Phone: " style="font-weight:600"/>
+                                        <h:outputText value="#{userManagedBean.currentUser.phone}"/>
+
+                                        <h:outputText value="E-mail: " style="font-weight:600"/>
+                                        <h:outputText value="#{userManagedBean.currentUser.email}"/>
+                                    </h:panelGrid>
+                                    <p:selectBooleanButton value="#{ordersMB.contact_info}" style="color:black" styleClass="button" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close">
+                                        <f:ajax render="@form"/>
+                                    </p:selectBooleanButton><br/><br/>
+                                </p:panel>
+                                <h:outputText rendered="#{!ordersMB.contact_info}" value="Or correct if we need to use another contact information"/><br/>
+                                <h:panelGrid id="panel-grid" columns="3" cellpadding="15" width="60%" rendered="#{!ordersMB.contact_info}">
+                                    <p:selectBooleanCheckbox value="#{ordersMB.check_box_name_enabled}">
+                                        <p:ajax update="contact_name"/>
+                                    </p:selectBooleanCheckbox>
+                                    <h:outputText value="Name: "/><p:inputText id="contact_name" size="20" disabled="#{!ordersMB.check_box_name_enabled}" value="#{ordersMB.current_order.contact_name}"/>
+                                    <p:selectBooleanCheckbox value="#{ordersMB.check_box_surname_enabled}">
+                                        <p:ajax update="contact_surname"/>
+                                    </p:selectBooleanCheckbox>
+                                    <h:outputText value="Surname: "/><p:inputText id="contact_surname" size="20" disabled="#{!ordersMB.check_box_surname_enabled}" value="#{ordersMB.current_order.contact_surname}"/>
+                                    <p:selectBooleanCheckbox value="#{ordersMB.check_box_email_enabled}">
+                                        <p:ajax update="contact_email"/>
+                                    </p:selectBooleanCheckbox>
+                                    <h:outputText value="Email: "/><p:inputText id="contact_email" size="20" disabled="#{!ordersMB.check_box_email_enabled}" value="#{ordersMB.current_order.contact_email}"/>
+                                    <p:selectBooleanCheckbox value="#{ordersMB.check_box_phone_enabled}">
+                                        <p:ajax update="contact_phone"/>
+                                    </p:selectBooleanCheckbox>
+                                    <h:outputText value="Phone number: "/><p:inputText id="contact_phone" size="20" disabled="#{!ordersMB.check_box_phone_enabled}" value="#{ordersMB.current_order.contact_phone}"/>
+                                </h:panelGrid><br/><br/>
+                                <h:outputText value="Also please choose the shipping method"/><br/><br/>
+                                <p:selectOneMenu value="#{ordersMB.shipping_name}">
+                                    <f:selectItem itemLabel="Select One" itemValue="" />  
+                                    <f:selectItems value="#{ordersMB.shipping_list}" />
+                                </p:selectOneMenu><br/><br/>
+                                <p:dialog id="dialog" widgetVar="dlg" resizable="false" showEffect="clip" hideEffect="clip">
+                                    <h:outputText value="Thank you fro the purchase. Our manager will contact you shortly"/>
+                                    <p:ajax event="close" listener="#{ordersMB.redirectToProfile()}"/>
+                                </p:dialog>
+                                <p:commandButton action="#{ordersMB.completeOrder()}" onclick="dlg.show()" value="Complete order"/>
+                            </h:form>
+                        </section>
+
+                    </div>
+                    <div class="3u">
+
+                        <!-- Sidebar -->
+                        <section>
+                            <h1>
+                                <h:outputLink value="profile_settings.xhtml">
+                                    <f:param name="id_prof" value="#{profileMB.curprofile.id}"/>
+                                    <h:outputText value="Profile settings"/>
+                                </h:outputLink>
+                            </h1>
+                        </section>
+                        <section>
+                            <h1>
+                                Information
+                            </h1>
+                            <h:panelGrid columns="2" cellpadding="10">  
+                                <h:outputText value="Name: " style="font-size: 12px"/>
+                                <h:outputText value="#{userManagedBean.currentUser.name}"/>
+
+                                <h:outputText value="Surname: " style="font-size: 12px"/>
+                                <h:outputText value="#{userManagedBean.currentUser.surName}"/>
+
+                                <h:outputText value="Register date: " style="font-size: 12px"/>
+                                <h:outputText value="#{userManagedBean.normRegDate()}"/>
+
+                                <h:outputText value="Phone: " style="font-size: 12px"/>
+                                <h:outputText value="#{userManagedBean.currentUser.phone}"/>
+
+                                <h:outputText value="E-mail: " style="font-size: 12px"/>
+                                <h:outputText value="#{userManagedBean.currentUser.email}"/>
+                            </h:panelGrid>
+                        </section>
+
+                        <section>
+                            <h1>
+                                Date and time
+                            </h1>
+                            <p:calendar style="font-size:12px" mode="inline" id="inlineCal"/>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div id="footer-wrapper">
+            <footer id="footer" class="5grid">
+                <div class="8u-first">
+
+                    <!-- Links -->
+                    <section>
+                        <h2>Links to Important Stuff</h2>
+                        <div class="3u-first">
+                            <ul class="link-list last-child">
+                                <li><a href="#">About us</a></li>
+                            </ul>
+                        </div>
+                        <div class="3u">
+                            <ul class="link-list last-child">
+                                <li><a href="#">Blog</a></li>
+                            </ul>
+                        </div>
+                        <div class="3u">
+                            <ul class="link-list last-child">
+                                <li><a href="#">Contact us</a></li>
+                            </ul>
+                        </div>
+                        <div class="3u">
+                            <ul class="link-list last-child">
+                                <li><a href="#">Help and support</a></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </div>
+
+            </footer>
+        </div>
+
+        <!-- Copyright -->
+        <div id="copyright">
+            (c) 2013 Triary.com. All rights reserved.
+        </div>
+    </h:body>
+</html>

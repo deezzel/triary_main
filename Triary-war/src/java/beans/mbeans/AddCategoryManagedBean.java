@@ -4,10 +4,15 @@
  */
 package beans.mbeans;
 
+import com.jsf.util.JsfUtil;
 import control.serviceimplem.CategoryService;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import model.Category;
 import org.primefaces.model.UploadedFile;
 
@@ -32,6 +37,14 @@ public class AddCategoryManagedBean {
             }
             categoryService.create(curcategory);
         }
+        try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("newaddproduct.xhtml");
+
+            } catch (IOException ex) {
+                Logger.getLogger(UserManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        
     }
 
     /**

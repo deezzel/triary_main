@@ -23,7 +23,7 @@ import model.baseclass.BaseEntity;
 
 /**
  *
- * @author aliona
+ * @author Artem Mihelson <artem.mihelson@gmail.com>
  */
 @Entity
 @Table(name = "diary", catalog = "triary", schema = "")
@@ -50,6 +50,8 @@ public class Diary extends BaseEntity implements Serializable {
     private String attempts;
     @OneToMany(mappedBy = "diary", cascade={CascadeType.ALL})
     private List<Comment> commentList;
+    @OneToMany(mappedBy="i_set", cascade={CascadeType.ALL})
+    private List<Sets> setsList;
     @ManyToOne
     @JoinColumn(name = "owner", referencedColumnName = "id")
     private Users owner;
@@ -138,5 +140,19 @@ public class Diary extends BaseEntity implements Serializable {
      */
     public void setAttempts(String attempts) {
         this.attempts = attempts;
+    }
+
+    /**
+     * @return the setsList
+     */
+    public List<Sets> getSetsList() {
+        return setsList;
+    }
+
+    /**
+     * @param setsList the setsList to set
+     */
+    public void setSetsList(List<Sets> setsList) {
+        this.setsList = setsList;
     }
 }

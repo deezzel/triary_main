@@ -19,9 +19,11 @@ import model.baseclass.BaseEntity;
  */
 @Entity
 @XmlRootElement
-@Table(name = "cart", catalog = "triary", schema = "")
+@Table(name = "shipping", catalog = "triary", schema = "")
 @NamedQueries({
-   @NamedQuery(name = "Shipping.findAll", query = "SELECT s FROM Shipping s")})
+   @NamedQuery(name = "Shipping.findAll", query = "SELECT s.name FROM Shipping s"),
+   @NamedQuery(name= "Shipping.findByName", query= "SELECT s FROM Shipping s WHERE s.name = :name")
+})
 public class Shipping extends BaseEntity implements Serializable{
     @Column(name="name", nullable=true, length=255)
     private String name;

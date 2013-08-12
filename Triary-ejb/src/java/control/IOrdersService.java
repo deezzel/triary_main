@@ -6,6 +6,7 @@ package control;
 
 import java.util.List;
 import model.Orders;
+import model.Users;
 
 
 /**
@@ -14,4 +15,7 @@ import model.Orders;
  */
 public interface IOrdersService {
     public List<Orders> getAll();
+    public List<Orders> getConsideringOrders(Users usr);
+    public List<Orders> getDeliveringOrders(Users usr);
+    public List<Orders> getDeliveredOrders(Users usr);
 }

@@ -43,13 +43,13 @@
                             <c:if test="#{userManagedBean.currentUser==null}">
                                 <p:growl id="growl" showDetail="true" sticky="false" life="2000" />
                                 <p:commandLink ajax="true" update="growl" actionListener="#{mainMB.addWarn}">
-                                    <h:outputText style="font-family: 'Yanone Kaffeesatz'; value="Profile"/>
+                                    <h:outputText style="font-family: 'Yanone Kaffeesatz';" value="Profile"/>
                                 </p:commandLink>                                
                             </c:if>    
                             <c:if test="#{userManagedBean.currentUser!=null}">
                                 <h:outputLink value="newprofile.xhtml">
                                     <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
-                                    <h:outputText style="font-family: 'Yanone Kaffeesatz'; value="Profile"/>
+                                    <h:outputText style="font-family: 'Yanone Kaffeesatz';" value="Profile"/>
                                 </h:outputLink>
                             </c:if>
                             <a href="market.xhtml">Market</a>

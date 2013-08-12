@@ -4,27 +4,28 @@
  */
 package control.serviceimplem;
 
-import control.IShippingService;
+import control.ISetsService;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import model.Shipping;
+import model.Diary;
+import model.Sets;
 
 /**
  *
- * @author kate
+ * @author Artem Mihelson <artem.mihelson@gmail.com>
  */
 @LocalBean
 @Stateless
-public class ShippingService extends Generic<Shipping> implements IShippingService {
+public class SetsService extends Generic<Sets> implements ISetsService{
 
     @PersistenceContext(unitName = "Triary-ejbPU")
     private EntityManager em;
-
-    public ShippingService() {
-        super(Shipping.class);
+    
+    public SetsService(){
+        super(Sets.class);
     }
     
     public void persist(Object object) {
@@ -37,13 +38,13 @@ public class ShippingService extends Generic<Shipping> implements IShippingServi
     }
 
     @Override
-    public List<String> getAll() {
-        return (List<String>) em.createNamedQuery("Shipping.findAll").getResultList();
+    public List<Sets> getAll() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Sets> getById(Diary i_set) {
+        return (List<Sets>) em.createNamedQuery("Sets.getById").setParameter("diary_id", i_set).getResultList();
     }
     
-    @Override
-    public Shipping getByName(String name) {
-        return (Shipping) em.createNamedQuery("Shipping.findByName").setParameter("name", name).getSingleResult();
-    }
 }
-

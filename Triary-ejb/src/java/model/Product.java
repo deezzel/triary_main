@@ -26,11 +26,14 @@ import model.baseclass.BaseEntity;
 @NamedQueries({
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
     @NamedQuery(name = "Product.getImage", query = "SELECT p.image FROM Product p WHERE p.id = :product_id")
+    
 })
 public class Product extends BaseEntity implements Serializable {
 
-    @Column(name = "description", nullable = true, length = 1500)
+    @Column(name = "description", nullable = true, length = 3500)
     private String description;
+    @Column(name = "shortdesc", nullable = true, length = 1500)
+    private String shortdesc;
     @Column(name = "name", nullable = true, length = 255)
     private String name;
     @Column(name = "image", nullable = true)
@@ -48,6 +51,9 @@ public class Product extends BaseEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "orders", referencedColumnName = "id")
     private Orders orders;
+//    @ManyToOne
+//    @JoinColumn(name = "cart", nullable = true, referencedColumnName = "id")
+//    private Cart cart;
 
     /**
      * @return the description
@@ -160,4 +166,33 @@ public class Product extends BaseEntity implements Serializable {
     public void setOrders(Orders orders) {
         this.orders = orders;
     }
+
+    /**
+     * @return the shortdesc
+     */
+    public String getShortdesc() {
+        return shortdesc;
+    }
+
+    /**
+     * @param shortdesc the shortdesc to set
+     */
+    public void setShortdesc(String shortdesc) {
+        this.shortdesc = shortdesc;
+    }
+
+//    /**
+//     * @return the cart
+//     */
+//    public Cart getCart() {
+//        return cart;
+//    }
+//
+//    /**
+//     * @param cart the cart to set
+//     */
+//    public void setCart(Cart cart) {
+//        this.cart = cart;
+//    }
+
 }

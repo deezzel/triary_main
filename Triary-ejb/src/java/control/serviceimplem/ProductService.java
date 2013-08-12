@@ -10,7 +10,10 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.ConstraintViolationException;
+import model.Cart;
 import model.Product;
+import model.Users;
 
 /**
  *
@@ -46,4 +49,24 @@ public class ProductService extends Generic<Product> implements IProductService 
         return (byte[]) em.createNamedQuery("Product.getImage").setParameter("product_id", product_id).getSingleResult();
     }
     
+    @Override
+    public List<Product> getFromCart(Users usr){
+        return (List<Product>) em.createNamedQuery("Product.getFromCart").setParameter("user_id", usr).getResultList();
+    }
+
+    @Override
+    public void decreaseAmount(Product product, Integer amount){
+        Integer cnt = product.getCount();
+        cnt = cnt - amount;
+        product.setCount(cnt);
+        edit(product);
+    }
+    
+    @Override
+    public void increaseAmount(Product product, Integer amount){
+        Integer cnt = product.getCount();
+        cnt = cnt + amount;
+        product.setCount(cnt);
+        edit(product);
+    }
 }

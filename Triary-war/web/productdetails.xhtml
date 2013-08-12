@@ -16,6 +16,14 @@
         <link rel="stylesheet" href="css/style.css" />
         <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+        <style type="text/css">
+            .ui-growl{
+                font-family: 'Yanone Kaffeesatz';
+                position: absolute;
+                top:10em;
+                left: 25em;
+            }
+        </style>
     </h:head>
     <h:body>
 
@@ -34,8 +42,19 @@
                             <a style="font-weight:bold" href="newpublications.xhtml">News</a>
                             <a style="font-weight:bold" href="newtrmethods.xhtml">Training Methods</a>
                             <a style="font-weight:bold" href="newdiets.xhtml">Diets</a>
-                            <h:outputLink value="newprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText value="Profile"/></h:outputLink>
-                            <a href="twocolumn2.html">Market</a>
+                            <c:if test="#{userManagedBean.currentUser==null}">
+                                <p:growl id="growl" showDetail="true" sticky="false" life="2000" />
+                                <p:commandLink ajax="true" update="growl" actionListener="#{mainMB.addWarn}">
+                                    <h:outputText style="font-family: 'Yanone Kaffeesatz';" value="Profile"/>
+                                </p:commandLink>                                
+                            </c:if>    
+                            <c:if test="#{userManagedBean.currentUser!=null}">
+                                <h:outputLink value="newprofile.xhtml">
+                                    <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
+                                    <h:outputText value="Profile"/>
+                                </h:outputLink>
+                            </c:if>
+                            <a href="market.xhtml">Market</a>
                             <c:if test="${userManagedBean.currentUser==null}">
                                 <h:outputLink style="font-weight:bold; font-size:1.8em" value="newlogin.xhtml" title="login">
                                     <h:outputText value="Sign in"/>
@@ -63,64 +82,30 @@
 
                         <!-- Main Content -->
                         <section>
-                            <h:form enctype="multipart/form-data">
-                                <p style="font-family: 'Yanone Kaffeesatz';">Choose image for the product</p>
-
-
-                                <p:fileUpload showButtons="false"
-                                              value="#{addProductMB.input_file}"
-                                              mode="simple"   
-
-                                              sizeLimit="10000000"   
-                                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>  
-
-
-                                <br/>
-                                <p style="font-family: 'Yanone Kaffeesatz';">Type the name of the product</p>
-                                <p:inputText value="#{addProductMB.curproduct.name}"/>
-                                <br/><br/>
-                                <p style="font-family: 'Yanone Kaffeesatz';">Select the category of the product</p>
-                                <p:selectOneMenu value="#{addProductMB.category_name}">
-                                    <f:selectItem itemLabel="Select One" itemValue="" />  
-                                    <f:selectItems value="#{addProductMB.category_list}" />
-                                </p:selectOneMenu>
-                                <h:outputText style="font-family: 'Yanone Kaffeesatz';" value=" or "/><h:outputLink value="newaddcategory.xhtml"><h:outputText style="font-family: 'Yanone Kaffeesatz';" value="create new one"/></h:outputLink>
-                                <br/><br/>
-                                <p style="font-family: 'Yanone Kaffeesatz';">Type the description of the product</p>
-                                <p:inputTextarea style="font-family: 'Yanone Kaffeesatz';" value="#{addProductMB.curproduct.description}" cols="50" rows="10"/>
-                                <br/><br/>
-                                <p style="font-family: 'Yanone Kaffeesatz';">Type the short description of the product. It will be displayed in the market</p>
-                                <p:inputTextarea style="font-family: 'Yanone Kaffeesatz';" value="#{addProductMB.curproduct.shortdesc}" cols="50" rows="10" counter="counter" maxlength="150" counterTemplate="{0} Characters left"/>
-                                <h:outputText style="font-family: 'Yanone Kaffeesatz';" id="counter" />
-                                <br/><br/>
-                                <p style="font-family: 'Yanone Kaffeesatz';">Specify the price of the product</p>
-                                <p:spinner style="font-family: 'Yanone Kaffeesatz';" min="0" max="2000" maxlength="5" value="#{addProductMB.curproduct.price}"/>
-                                <br/><br/>
-                                <p style="font-family: 'Yanone Kaffeesatz';">Specify amount  of the product in the warehouse</p>
-                                <p:spinner style="font-family: 'Yanone Kaffeesatz';" min="0" max="2000" maxlength="5" value="#{addProductMB.curproduct.count}"/>
-                                <br/><br/>
-
-                                <p:commandButton ajax="false" style="font-family: 'Yanone Kaffeesatz';" value="Add product" action="#{addProductMB.addProduct()}"/>
+                            <h:form>
+                                <h:graphicImage value="ImageDisplay?product_id=#{productDetailsMB.curProduct.id}"/><br/>
+                                <strong><h:outputText value="#{productDetailsMB.curProduct.name}" style="float: left; font-size:1.4em;font-weight:bold"/></strong><br/>
+                                <h:outputText escape="false" value="#{productDetailsMB.curProduct.description}"/><br/>
+                                <h:outputText style="color:orangered; font-weight:bolder; font-size:1.7em" value="Price - #{productDetailsMB.curProduct.price} UAH"/>
+                                <p:rating value="#{productDetailsMB.curProduct.rating}"/><br/>
+                                <h:outputText value="Please select number of products "/><p:spinner min="1"  size="3" value="#{productDetailsMB.curCart.count}"/><br/>
+                                <p:growl id="growl" showDetail="true" sticky="true"/>
+                                <p:commandButton ajax="true" update="growl" value="Buy" action="#{productDetailsMB.addToCart()}" style="font-family: 'Yanone Kaffeesatz';"/>
                             </h:form>
                         </section>
-
+                       
                     </div>
                     <div class="3u">
 
                         <!-- Sidebar -->
                         <section>
                             <h1>
-                                Top 10 news
+                                Top 10 purchased products
                             </h1>
                         </section>
                         <section>
                             <h1>
-                                Top 10 training methods
-                            </h1>
-                        </section>
-                        <section>
-                            <h1>
-                                Top 10 diets
+                                Top 10 rated products
                             </h1>
                         </section>
                     </div>

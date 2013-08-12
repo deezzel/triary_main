@@ -6,10 +6,14 @@ package beans.mbeans;
 
 import control.serviceimplem.CategoryService;
 import control.serviceimplem.ProductService;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import model.Product;
 import org.primefaces.model.UploadedFile;
 
@@ -76,9 +80,16 @@ public class AddProductManagedBean {
             if (input_file!=null){
             curproduct.setImage(this.input_file.getContents());
             }
+            curproduct.setRating(0);
             curproduct.setCategory(categoryService.getByName(category_name));
             productService.create(curproduct);
         }
+        try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("market.xhtml");
+
+            } catch (IOException ex) {
+                Logger.getLogger(UserManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     /**

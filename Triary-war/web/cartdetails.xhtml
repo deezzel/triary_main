@@ -16,6 +16,20 @@
         <link rel="stylesheet" href="css/style.css" />
         <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+        <style type="text/css">
+            .ui-widget-content{
+                background-color: gray;
+            }
+            .ui-dialog-titlebar{
+                font-family: 'Yanone Kaffeesatz';
+                color:black;
+                background-color: gray;
+            }
+            .ui-dialog-titlebar-icon{
+                color: gray;
+                
+            }
+        </style>
     </h:head>
     <h:body>
 
@@ -34,7 +48,9 @@
                             <a style="font-weight:bold" href="newpublications.xhtml">News</a>
                             <a style="font-weight:bold" href="newtrmethods.xhtml">Training Methods</a>
                             <a style="font-weight:bold" href="newdiets.xhtml">Diets</a>
-                            <h:outputLink value="newprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText style="color:red" value="Profile"/></h:outputLink>
+                            <c:if test="#{mainMB.currentPage=='profile'}">
+                                <h:outputLink value="newprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText style="color:red" value="Profile"/></h:outputLink>
+                            </c:if>
                             <a href="market.xhtml">Market</a>
                             <c:if test="${userManagedBean.currentUser==null}">
                                 <h:outputLink style="font-weight:bold; font-size:1.8em" value="newlogin.xhtml" title="login">
@@ -42,12 +58,16 @@
                                 </h:outputLink>
                             </c:if>
                             <c:if test="${userManagedBean.currentUser!=null}">
+
                                 <h:commandLink style="font-weight:bold; font-size:1.8em" action="#{userManagedBean.logout()}" title="logout">
                                     <h:outputText value="Sign out"/>
                                 </h:commandLink>
+
                             </c:if>
+
                         </h:form>
                     </nav>
+
                 </div>
             </header>
         </div>
@@ -66,25 +86,51 @@
                                         <h:outputText value="Back to the profile"/>
                                     </h:outputLink>
                                 </p:menuitem>
-                                <c:if test="${profileMB.curprofile.diary_enabled}">
-                                    <p:menuitem>
-                                        <h:outputLink value="newdiary.xhtml">
-                                            <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
-                                            <h:outputText value="Diary"/>
-                                        </h:outputLink>
-                                    </p:menuitem>
-                                </c:if>
+                                <p:menuitem>
+                                    <h:outputLink value="market.xhtml">
+                                        <h:outputText value="Continue shopping"/>
+                                    </h:outputLink>
+                                </p:menuitem>
                             </p:breadCrumb>
+
                             <section>
                                 <h1>
-                                    My statistics
-                                </h1>
-                                <p:lineChart xaxisLabel="Date" id="category" value="#{statMB.all}" legendPosition="e" 
-                                             title="Statistics" minY="0" maxY="150" style="height:400px;margin-top:20px"/>
+                                    Cart
+                                </h1><br/>
+                                <h:form prependId="false">
+                                    <p:dataTable value="#{profileMB.lstProductsInCart}" var="product">
+                                        <p:column>
+                                            <h:graphicImage value="ImageDisplay?product_id=#{product.product_id}" style="width: 32px; height: 60px"/>
+                                        </p:column>
+                                        <p:column headerText="Name" style="vertical-align:middle">
+                                            <h:outputText value="#{product.name}"/>
+                                        </p:column>
+                                        <p:column headerText="Count" style="vertical-align:middle">
+                                            <h:outputText value="#{product.count}"/>
+                                        </p:column>
+                                        <p:column headerText="Description" style="vertical-align:middle">
+                                            <h:outputText value="#{product.shortdesc}"/>
+                                        </p:column>
+                                        <p:column headerText="Price" style="vertical-align:middle">
+                                            <h:outputText value="#{product.price}"/>
+                                        </p:column>
+                                        <p:column style="vertical-align:middle">
+                                            <p:commandButton title="Remove from cart" ajax="false" update="@form" icon="ui-icon-closethick" action="#{profileMB.cancelProduct()}">
+                                                <f:setPropertyActionListener target="#{profileMB.id_product}" value="#{product.id}"/>
+                                            </p:commandButton>
+                                        </p:column>
+                                    </p:dataTable>
+                                    <p:separator/>
+                                    <h:outputText value="Total price #{cartdetailsMB.totalPrice} UAH"/>
+                                    <br/><br/>
+                                    <p:commandButton ajax="false"  value="Confirm order" action="#{ordersMB.confirmOrder()}"/>
+                                </h:form>
                             </section>
                         </section>
+
                     </div>
                     <div class="3u">
+
                         <!-- Sidebar -->
                         <section>
                             <h1>
@@ -115,13 +161,7 @@
                                 <h:outputText value="#{userManagedBean.currentUser.email}"/>
                             </h:panelGrid>
                         </section>
-                        <section>
-                            <h1>
-                                My Cart
-                            </h1>
-                            Your cart currently is empty.
-                            Please visit our Market and add the suitable product to it.
-                        </section>
+
                         <section>
                             <h1>
                                 Date and time

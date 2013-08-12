@@ -25,7 +25,6 @@ import model.Users;
  */
 @Stateless
 @LocalBean
-
 public class CommentService extends Generic<Comment> implements ICommentService{
 
     @PersistenceContext(unitName = "Triary-ejbPU")

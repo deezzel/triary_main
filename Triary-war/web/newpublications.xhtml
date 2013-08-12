@@ -18,7 +18,7 @@
         <!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
         <style type="text/css">
             .ui-growl{
-                font-family: 'Yanone Kaffeesatz';
+                font-family: 'Open Sans Condensed', sans-serif;
                 position: absolute;
                 top:10em;
                 left: 25em;                
@@ -47,13 +47,13 @@
                             <c:if test="#{userManagedBean.currentUser==null}">
                                 <p:growl id="growl" showDetail="true" sticky="false" life="2000" />
                                 <p:commandLink ajax="true" update="growl" actionListener="#{mainMB.addWarn}">
-                                    <h:outputText style="font-family: 'Yanone Kaffeesatz';" value="Profile"/>
+                                    <h:outputText style="font-family: 'Open Sans Condensed', sans-serif;" value="Profile"/>
                                 </p:commandLink>                                
                             </c:if>    
                             <c:if test="#{userManagedBean.currentUser!=null}">
                                 <h:outputLink value="newprofile.xhtml">
                                     <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
-                                    <h:outputText style="font-family: 'Yanone Kaffeesatz';" value="Profile"/>
+                                    <h:outputText style="font-family: 'Open Sans Condensed', sans-serif;" value="Profile"/>
                                 </h:outputLink>
                             </c:if>
                             <a href="market.xhtml">Market</a>
@@ -96,10 +96,10 @@
                                     <section>
                                         <p:column>
 
-                                            <strong><h:outputText value="#{news.title}" style="float: left; font-weight:bold" /></strong>
+                                            <strong><h:outputText value="#{news.title}" style="font-family: 'Open Sans Condensed', sans-serif; float: left; font-weight:bold" /></strong>
 
                                             <br></br>
-                                            <h:outputText value="#{news.subtext}..." style="float: left"  escape="false"/>
+                                            <h:outputText value="#{news.subtext}..." style="font-family: 'Open Sans Condensed', sans-serif;" escape="false"/>
                                             <br></br>
 
                                             <p:spacer height="1em"></p:spacer>
@@ -116,14 +116,14 @@
                                             <h:outputLink  value="newcommentpubl.xhtml" style="float: right">
                                                 <f:param name="id_news" value="#{news.id}"/>
 
-                                                <h:outputText value="read more" style="font-family: 'Yanone Kaffeesatz';"/>
+                                                <h:outputText value="read more" style="font-family: 'Open Sans Condensed', sans-serif"/>
                                             </h:outputLink>
 
                                         </p:column>
                                     </section>
                                 </p:dataGrid>
                                 <c:if test="${publMB.admin}">
-                                    <p:button title="Add news" outcome="newaddpubl" value="Add news" image="ui-icon-plus" style="font-family: 'Yanone Kaffeesatz';"/>
+                                    <p:button title="Add news" outcome="newaddpubl" value="Add news" image="ui-icon-plus" style="font-family: 'Open Sans Condensed', sans-serif;"/>
                                 </c:if>
                             </h:form>
                         </section>
@@ -142,10 +142,10 @@
                                             columns="1"
                                             >
                                     <li>
-                                    <h:outputLink  value="newcommentpubl.xhtml">
-                                        <f:param name="id_news" value="#{topnews.id}"/>
-                                        <h:outputText value="#{topnews.title}" style="font-family: 'Yanone Kaffeesatz';color:black; font-size:0.8em"/>
-                                    </h:outputLink>
+                                        <h:outputLink  value="newcommentpubl.xhtml">
+                                            <f:param name="id_news" value="#{topnews.id}"/>
+                                            <h:outputText value="#{topnews.title}" style="font-family: 'Open Sans Condensed', sans-serif;color:black; font-size:0.8em"/>
+                                        </h:outputLink>
                                     </li>
                                 </p:dataGrid>
                             </h:form>
@@ -160,10 +160,10 @@
                                             columns="1"
                                             >
                                     <li>
-                                    <h:outputLink  value="newcommentpubl.xhtml">
-                                        <f:param name="id_news" value="#{toptrmethods.id}"/>
-                                        <h:outputText value="#{toptrmethods.title}" style="font-family: 'Yanone Kaffeesatz';color:black; font-size:0.8em"/>
-                                    </h:outputLink>
+                                        <h:outputLink  value="newcommentpubl.xhtml">
+                                            <f:param name="id_news" value="#{toptrmethods.id}"/>
+                                            <h:outputText value="#{toptrmethods.title}" style="font-family: 'Open Sans Condensed', sans-serif;color:black; font-size:0.8em"/>
+                                        </h:outputLink>
                                     </li>
                                 </p:dataGrid>
                             </h:form>
@@ -178,10 +178,10 @@
                                             columns="1"
                                             >
                                     <li>
-                                    <h:outputLink  value="newcommentpubl.xhtml">
-                                        <f:param name="id_news" value="#{topdiets.id}"/>
-                                        <h:outputText value="#{topdiets.title}" style="font-family: 'Yanone Kaffeesatz';color:black; font-size:0.8em"/>
-                                    </h:outputLink>
+                                        <h:outputLink  value="newcommentpubl.xhtml">
+                                            <f:param name="id_news" value="#{topdiets.id}"/>
+                                            <h:outputText value="#{topdiets.title}" style="font-family: 'Open Sans Condensed', sans-serif;color:black; font-size:0.8em"/>
+                                        </h:outputLink>
                                     </li>
                                 </p:dataGrid>
                             </h:form>

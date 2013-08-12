@@ -6,7 +6,7 @@
     xmlns:f="http://java.sun.com/jsf/core"  
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="http://java.sun.com/jsp/jstl/core"
-    
+
     xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Triary (homepage)</title>
@@ -141,34 +141,25 @@
                                         <h:outputText value=""/>
                                     </h:panelGrid>
                                     <br/>
-                                    <h:panelGrid columns="8" style="margin-bottom:10px" cellpadding="15" cellspacing="15" width="800px">
-                                        <!--third row-->
-                                        <h:outputLabel for="minmax" value="Number of attempts: " />  
-                                        <p:spinner id="minmax" value="#{diarylMB.curDiary.trainingDuration}" min="0" max="100" size="5"/>
-                                        <h:outputLabel for="rep" value="Number of repeats: " />  
-                                        <p:spinner id="rep" value="#{diarylMB.curDiary.repeatAmount}" min="0" max="100" size="5"/>
-                                        <h:outputLabel for="ves" value="Weight of equipment: " />  
-                                        <p:spinner id="ves" value="#{diarylMB.curDiary.weight}" min="0" max="500" size="5"/>
-                                        <h:outputText value=""/>
-                                    </h:panelGrid>
                                     <h:outputText value="Подходы" style="font-family: 'Open Sans Condensed'"/><br/>
                                     <h:panelGrid columns="5" width="250px" id="grid_attempts">
                                         <h:form id="form_attempts">
                                             <h:outputText value="1. " style="font-family: 'Open Sans Condensed'"/>
-                                            <p:inputText size="3" value="#{diarylMB.cnt_att1}"/>/<p:inputText size="3" value="#{diarylMB.w_at1}"/>
+                                            <p:inputText size="3" value="#{diarylMB.cnt_att1}" style="font-family: 'Open Sans Condensed'"/>/<p:inputText style="font-family: 'Open Sans Condensed'" size="3" value="#{diarylMB.w_at1}"/>
                                             <p:commandButton id="first_attempt" image="ui-icon-plus" actionListener="#{diarylMB.setAttempt2Visible()}" update=":main_diary_form"/><br/>
 
                                             <h:outputText id="att2_out_text" rendered="#{diarylMB.attempt2}" value="2. " style="font-family: 'Open Sans Condensed'"/>
-                                            <p:inputText id="att2_cnt_input" rendered="#{diarylMB.attempt2}" size="3" value="#{diarylMB.cnt_att2}"/><h:outputText id="att2_slash" rendered="#{diarylMB.attempt2}" value="/"/><p:inputText id="att2_w_input" rendered="#{diarylMB.attempt2}" size="3" value="#{diarylMB.w_at2}"/>
+                                            <p:inputText id="att2_cnt_input" rendered="#{diarylMB.attempt2}" size="3" value="#{diarylMB.cnt_att2}" style="font-family: 'Open Sans Condensed'"/><h:outputText id="att2_slash" rendered="#{diarylMB.attempt2}" value="/"/><p:inputText id="att2_w_input" rendered="#{diarylMB.attempt2}" size="3" value="#{diarylMB.w_at2}" style="font-family: 'Open Sans Condensed'"/>
                                             <p:commandButton id="second_attempt" image="ui-icon-plus" rendered="#{diarylMB.attempt2}" action="#{diarylMB.setAttempt3Visible()}" update=":main_diary_form"/><br/>
 
                                             <h:outputText rendered="#{diarylMB.attempt3}" value="3. " style="font-family: 'Open Sans Condensed'"/>
-                                            <p:inputText rendered="#{diarylMB.attempt3}" size="3" value="#{diarylMB.cnt_att3}"/><h:outputText rendered="#{diarylMB.attempt3}" value="/"/><p:inputText rendered="#{diarylMB.attempt3}" size="3" value="#{diarylMB.w_at3}"/>
+                                            <p:inputText rendered="#{diarylMB.attempt3}" size="3" value="#{diarylMB.cnt_att3}" style="font-family: 'Open Sans Condensed'"/><h:outputText rendered="#{diarylMB.attempt3}" value="/"/><p:inputText rendered="#{diarylMB.attempt3}" size="3" value="#{diarylMB.w_at3}" style="font-family: 'Open Sans Condensed'"/>
                                             <p:commandButton id="third_attempt" image="ui-icon-plus" rendered="#{diarylMB.attempt3}" action="#{diarylMB.setAttempt4Visible()}" update=":main_diary_form"/><br/>
                                         </h:form>
                                     </h:panelGrid>
                                     <h:outputLabel value="Fillings: "/><br/>
                                     <p:inputTextarea rows="5" cols="30" value="#{diarylMB.curDiary.fillings}"/><br/>
+                                    
                                     <p:commandButton style="font-family: 'Yanone Kaffeesatz';" value="Add record" action="#{diarylMB.addRecord()}" update=":main_diary_form"/>
                                 </h:form>
                             </section>
@@ -198,11 +189,17 @@
                                         <p:column style="width:14%; font-family: 'Open Sans Condensed'" headerText="Подходы (раз/вес): ">
                                             <p:cellEditor>
                                                 <f:facet name="output">
-                                                    <ui:repeat value="#{diary.attempts.split(';')}" var="attempt">
-                                                        <h:outputText escape="false" style="white-space:pre-line;" value="#{attempt}"/>
-                                                    </ui:repeat>
+                                                    <p:dataList value="#{diarylMB.getLstSets(diary)}" var="set" itemType="disc" >
+                                                        #{set.amount}/#{set.weight}
+                                                    </p:dataList>
+                                                    
                                                 </f:facet>
-                                                <f:facet name="input"><p:inputText size="3" value="#{diary.trainingDuration}"/></f:facet>
+                                                <f:facet name="input">
+                                                    <p:dataList value="#{diarylMB.getLstSets(diary)}" var="set_edit" itemType="square">
+                                                        <p:inputText value="#{set_edit.amount}" size="5"/>/<p:inputText value="#{set_edit.weight}" size="5"/>
+                                                    </p:dataList>
+<!--                                                    <p:inputText style="white-space:pre-line;" size="9" value="{diary.attempts}"/>-->
+                                                </f:facet>
                                             </p:cellEditor>
                                         </p:column>
                                         <p:column style="width:7%" headerText="Fillings: ">

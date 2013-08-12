@@ -16,6 +16,9 @@
         <link rel="stylesheet" href="css/style.css" />
         <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+        <style type="text/css">
+            
+        </style>
     </h:head>
     <h:body>
 
@@ -87,24 +90,24 @@
 
                             <section>
                                 <h:form id="diet-form" prependId="false">
-                                <h1>
-                                    My diet and nutrition
-                                </h1>
-                                <p:inplace editor="true" id="ajaxInplace">
-                                    <p:inputTextarea rows="6" cols="33" value="#{profileMB.curprofile.diet}" />
-                                    <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
-                                </p:inplace>
+                                    <h1>
+                                        My diet and nutrition
+                                    </h1>
+                                    <p:inplace editor="true" id="ajaxInplace">
+                                        <p:inputTextarea rows="6" cols="33" value="#{profileMB.curprofile.diet}" />
+                                        <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                    </p:inplace>
                                 </h:form>
                             </section>
                             <section>
                                 <h:form id="method-form" prependId="false">
-                                <h1>
-                                    My training method
-                                </h1>
-                                <p:inplace editor="true" id="ajaxInplace1">
-                                    <p:inputTextarea rows="6" cols="33" value="#{profileMB.curprofile.ration}" />
-                                    <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
-                                </p:inplace>
+                                    <h1>
+                                        My training method
+                                    </h1>
+                                    <p:inplace editor="true" id="ajaxInplace1">
+                                        <p:inputTextarea rows="6" cols="33" value="#{profileMB.curprofile.ration}" />
+                                        <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                    </p:inplace>
                                 </h:form>
                             </section>
                             <section>
@@ -120,147 +123,175 @@
                                         </p:inplace>
                                         <h:outputLabel for="weight" value="Weight: "/>
                                         <p:inplace editor="true" id="ajaxweight">
-                                            <p:inputText id="weight" value="#{profileMB.curprofile.weight}"/>
-                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
-                                        </p:inplace>
-                                        <h:outputLabel for="waist" value="Waist: "/>
-                                        <p:inplace editor="true" id="ajaxwaist">
-                                            <p:inputText id="waist" value="#{profileMB.curprofile.waist_dimension}"/>
-                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
-                                        </p:inplace>
-                                        <h:outputLabel for="biceps" value="Biceps: "/>
-                                        <p:inplace editor="true" id="ajaxbiceps">
-                                            <p:inputText id="biceps" value="#{profileMB.curprofile.biceps_dimension}"/>
-                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
-                                        </p:inplace>
-                                        <h:outputLabel for="chest" value="Chest: "/>
-                                        <p:inplace editor="true" id="ajaxchest">
-                                            <p:inputText id="chest" value="#{profileMB.curprofile.chest_dimension}"/>
-                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
-                                        </p:inplace>
-                                        <h:outputLabel for="forearm" value="Forearm: "/>
-                                        <p:inplace editor="true" id="ajaxforearm">
-                                            <p:inputText id="forearm" value="#{profileMB.curprofile.forearm_dimension}"/>
-                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
-                                        </p:inplace>
-                                        <h:outputLabel for="wrist" value="Wrist: "/>
-                                        <p:inplace editor="true" id="ajaxwrist">
-                                            <p:inputText id="wrist" value="#{profileMB.curprofile.wrist_dimension}"/>
-                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
-                                        </p:inplace>
-                                        <h:outputLabel for="neck" value="Neck: "/>
-                                        <p:inplace editor="true" id="ajaxneck">
-                                            <p:inputText id="neck" value="#{profileMB.curprofile.neck_dimension}"/>
-                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
-                                        </p:inplace>
-                                        <h:outputLabel for="hip" value="Hip: "/>
-                                        <p:inplace editor="true" id="ajaxhip">
-                                            <p:inputText id="hip" value="#{profileMB.curprofile.thigh_dimension}"/>
-                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
-                                        </p:inplace>
-                                        <h:outputLabel for="butts" value="Butts: "/>
-                                        <p:inplace editor="true" id="ajaxbutts">
-                                            <p:inputText id="butts" value="#{profileMB.curprofile.butt_dimension}"/>
-                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
-                                        </p:inplace>
-                                        <h:outputLabel for="shin" value="Shin: "/>
-                                        <p:inplace editor="true" id="ajaxshin">
-                                            <p:inputText id="shin" value="#{profileMB.curprofile.shin_dimension}"/>
-                                            <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
-                                        </p:inplace>
-                                    </p:panelGrid>
-                                </h:form>
+                                              <p:inputText id="weight" value="#{profileMB.curprofile.weight}"/>
+                                                  <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                              </p:inplace>
+                                              <h:outputLabel for="waist" value="Waist: "/>
+                                              <p:inplace editor="true" id="ajaxwaist">
+                                                  <p:inputText id="waist" value="#{profileMB.curprofile.waist_dimension}"/>
+                                                  <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                              </p:inplace>
+                                              <h:outputLabel for="biceps" value="Biceps: "/>
+                                              <p:inplace editor="true" id="ajaxbiceps">
+                                                  <p:inputText id="biceps" value="#{profileMB.curprofile.biceps_dimension}"/>
+                                                  <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                              </p:inplace>
+                                              <h:outputLabel for="chest" value="Chest: "/>
+                                              <p:inplace editor="true" id="ajaxchest">
+                                                  <p:inputText id="chest" value="#{profileMB.curprofile.chest_dimension}"/>
+                                                  <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                              </p:inplace>
+                                              <h:outputLabel for="forearm" value="Forearm: "/>
+                                              <p:inplace editor="true" id="ajaxforearm">
+                                                  <p:inputText id="forearm" value="#{profileMB.curprofile.forearm_dimension}"/>
+                                                  <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                              </p:inplace>
+                                              <h:outputLabel for="wrist" value="Wrist: "/>
+                                              <p:inplace editor="true" id="ajaxwrist">
+                                                  <p:inputText id="wrist" value="#{profileMB.curprofile.wrist_dimension}"/>
+                                                  <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                              </p:inplace>
+                                              <h:outputLabel for="neck" value="Neck: "/>
+                                              <p:inplace editor="true" id="ajaxneck">
+                                                  <p:inputText id="neck" value="#{profileMB.curprofile.neck_dimension}"/>
+                                                  <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                              </p:inplace>
+                                              <h:outputLabel for="hip" value="Hip: "/>
+                                              <p:inplace editor="true" id="ajaxhip">
+                                                  <p:inputText id="hip" value="#{profileMB.curprofile.thigh_dimension}"/>
+                                                  <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                              </p:inplace>
+                                              <h:outputLabel for="butts" value="Butts: "/>
+                                              <p:inplace editor="true" id="ajaxbutts">
+                                                  <p:inputText id="butts" value="#{profileMB.curprofile.butt_dimension}"/>
+                                                  <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                              </p:inplace>
+                                              <h:outputLabel for="shin" value="Shin: "/>
+                                              <p:inplace editor="true" id="ajaxshin">
+                                                  <p:inputText id="shin" value="#{profileMB.curprofile.shin_dimension}"/>
+                                                  <p:ajax event="save" listener="#{profileMB.updateProfile()}"/>
+                                              </p:inplace>
+                                          </p:panelGrid>
+                                        </h:form>
+                                    </section>
+                                </section>
+
+                            </div>
+                            <div class="3u">
+
+                                <!-- Sidebar -->
+                                <section>
+                                    <h1>
+                                        <h:outputLink value="profile_settings.xhtml">
+                                            <f:param name="id_prof" value="#{profileMB.curprofile.id}"/>
+                                            <h:outputText value="Profile settings"/>
+                                        </h:outputLink>
+                                    </h1>
+                                </section>
+                                <section>
+                                    <h1>
+                                        Information
+                                    </h1>
+                                    <h:panelGrid columns="2" cellpadding="10">  
+                                        <h:outputText value="Name: " style="font-size: 12px"/>
+                                        <h:outputText value="#{userManagedBean.currentUser.name}"/>
+
+                                        <h:outputText value="Surname: " style="font-size: 12px"/>
+                                        <h:outputText value="#{userManagedBean.currentUser.surName}"/>
+
+                                        <h:outputText value="Register date: " style="font-size: 12px"/>
+                                        <h:outputText value="#{userManagedBean.normRegDate()}"/>
+
+                                        <h:outputText value="Phone: " style="font-size: 12px"/>
+                                        <h:outputText value="#{userManagedBean.currentUser.phone}"/>
+
+                                        <h:outputText value="E-mail: " style="font-size: 12px"/>
+                                        <h:outputText value="#{userManagedBean.currentUser.email}"/>
+                                    </h:panelGrid>
+                                </section>
+                                <section>
+                                    <h1>
+                                        My Cart
+                                    </h1>
+                                    <c:if test="#{cartdetailsMB.cartIsEmpty}">
+                                        Your cart currently is empty.
+                                        Please visit our Market and add the suitable product to it.
+                                    </c:if>
+                                    <c:if test="#{!cartdetailsMB.cartIsEmpty}">
+                                        <h:form>
+                                            <p:dataGrid value="#{profileMB.lstProductsInCart}" var="product"  
+                                                        rows="10" 
+                                                        columns="1"
+                                                        >
+                                                <li>
+                                                    <h:outputLink  value="productdetails.xhtml">
+                                                        <f:param name="id_prod" value="#{product.id}"/>
+                                                        <h:outputText value="#{product.name}"/>
+                                                    </h:outputLink>
+                                                </li>
+                                            </p:dataGrid>
+                                            <p:button image="ui-icon-cart" outcome="cartdetails" title="Complete order" value="Complete order" style="font-size:10px">
+                                                <f:param name="cart_of_user" value="#{userManagedBean.currentUser.id}"/>
+                                            </p:button>
+                                            </h:form>
+                                    </c:if>
+                                </section>
+                                <section>
+                                    <h1>
+                                        <h:outputLink value="orders.xhtml">
+                                            <f:param name="id_user" value="#{userManagedBean.currentUser.id}"/>
+                                            <h:outputText value="My Orders"/>
+                                        </h:outputLink>
+                                    </h1>
+                                </section>
+                                <section>
+                                    <h1>
+                                        Date and time
+                                    </h1>
+                                    <p:calendar style="font-size:12px" mode="inline" id="inlineCal"/>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer -->
+                <div id="footer-wrapper">
+                    <footer id="footer" class="5grid">
+                        <div class="8u-first">
+
+                            <!-- Links -->
+                            <section>
+                                <h2>Links to Important Stuff</h2>
+                                <div class="3u-first">
+                                    <ul class="link-list last-child">
+                                        <li><a href="#">About us</a></li>
+                                    </ul>
+                                </div>
+                                <div class="3u">
+                                    <ul class="link-list last-child">
+                                        <li><a href="#">Blog</a></li>
+                                    </ul>
+                                </div>
+                                <div class="3u">
+                                    <ul class="link-list last-child">
+                                        <li><a href="#">Contact us</a></li>
+                                    </ul>
+                                </div>
+                                <div class="3u">
+                                    <ul class="link-list last-child">
+                                        <li><a href="#">Help and support</a></li>
+                                    </ul>
+                                </div>
                             </section>
-                        </section>
 
-                    </div>
-                    <div class="3u">
-
-                        <!-- Sidebar -->
-                        <section>
-                            <h1>
-                                <h:outputLink value="profile_settings.xhtml">
-                                    <f:param name="id_prof" value="#{profileMB.curprofile.id}"/>
-                                    <h:outputText value="Profile settings"/>
-                                </h:outputLink>
-                            </h1>
-                        </section>
-                        <section>
-                            <h1>
-                                Information
-                            </h1>
-                            <h:panelGrid columns="2" cellpadding="10">  
-                                <h:outputText value="Name: " style="font-size: 12px"/>
-                                <h:outputText value="#{userManagedBean.currentUser.name}"/>
-
-                                <h:outputText value="Surname: " style="font-size: 12px"/>
-                                <h:outputText value="#{userManagedBean.currentUser.surName}"/>
-
-                                <h:outputText value="Register date: " style="font-size: 12px"/>
-                                <h:outputText value="#{userManagedBean.normRegDate()}"/>
-
-                                <h:outputText value="Phone: " style="font-size: 12px"/>
-                                <h:outputText value="#{userManagedBean.currentUser.phone}"/>
-
-                                <h:outputText value="E-mail: " style="font-size: 12px"/>
-                                <h:outputText value="#{userManagedBean.currentUser.email}"/>
-                            </h:panelGrid>
-                        </section>
-                        <section>
-                            <h1>
-                                My Cart
-                            </h1>
-                            Your cart currently is empty.
-                            Please visit our Market and add the suitable product to it.
-                        </section>
-                        <section>
-                            <h1>
-                                Date and time
-                            </h1>
-                            <p:calendar style="font-size:12px" mode="inline" id="inlineCal"/>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer -->
-        <div id="footer-wrapper">
-            <footer id="footer" class="5grid">
-                <div class="8u-first">
-
-                    <!-- Links -->
-                    <section>
-                        <h2>Links to Important Stuff</h2>
-                        <div class="3u-first">
-                            <ul class="link-list last-child">
-                                <li><a href="#">About us</a></li>
-                            </ul>
                         </div>
-                        <div class="3u">
-                            <ul class="link-list last-child">
-                                <li><a href="#">Blog</a></li>
-                            </ul>
-                        </div>
-                        <div class="3u">
-                            <ul class="link-list last-child">
-                                <li><a href="#">Contact us</a></li>
-                            </ul>
-                        </div>
-                        <div class="3u">
-                            <ul class="link-list last-child">
-                                <li><a href="#">Help and support</a></li>
-                            </ul>
-                        </div>
-                    </section>
 
+                    </footer>
                 </div>
 
-            </footer>
-        </div>
-
-        <!-- Copyright -->
-        <div id="copyright">
-            (c) 2013 Triary.com. All rights reserved.
-        </div>
-    </h:body>
-</html>
+                <!-- Copyright -->
+                <div id="copyright">
+                    (c) 2013 Triary.com. All rights reserved.
+                </div>
+            </h:body>
+        </html>

@@ -12,5 +12,6 @@ import model.Shipping;
  * @author kate
  */
 public interface IShippingService {
-    public List<Shipping> getAll();
+    public List<String> getAll();
+    public Shipping getByName(String name);
 }

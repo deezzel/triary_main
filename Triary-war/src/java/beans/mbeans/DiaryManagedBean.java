@@ -4,9 +4,10 @@
  */
 package beans.mbeans;
 
-import com.jsf.util.JsfUtil;
 import control.serviceimplem.DiaryService;
+import control.serviceimplem.SetsService;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,12 +17,11 @@ import javax.ejb.EJB;
 import javax.faces.application.ViewHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletResponse;
 import model.Diary;
+import model.Sets;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -33,9 +33,13 @@ import org.primefaces.event.RowEditEvent;
 public class DiaryManagedBean {
 
     private Diary curDiary = new Diary();
+    private Sets curSets = new Sets();
+    @EJB
+    private SetsService setsService;
     @EJB
     private DiaryService diaryService;
     private List<Diary> lstDiary;
+    private List<Sets> lstSets;
     @ManagedProperty(value = "#{userManagedBean}")
     private UserManagedBean usrMB;
     private String selectedItemType;
@@ -82,6 +86,10 @@ public class DiaryManagedBean {
 
     public static String newline = System.getProperty("line.separator");
     
+    private List<Sets> sets_list = new ArrayList<Sets>();
+    
+    private String set_id;
+    
     public DiaryManagedBean() {
         muscle_grs = new HashMap<String, String>();
         muscle_grs.put("Neck", "Neck");
@@ -90,6 +98,15 @@ public class DiaryManagedBean {
         muscle_grs.put("Pres", "Pres");
         muscle_grs.put("Legs", "Legs");
         muscle_grs.put("Chest", "Chest");
+    }
+    
+    /**
+     * @return the lstSets
+     */
+    public List<Sets> getLstSets(Diary diary) {
+        
+        lstSets = setsService.getById(diary);
+        return lstSets;
     }
 
     /**
@@ -140,31 +157,46 @@ public class DiaryManagedBean {
     public void addRecord() {
 //        selectedItem = this.getSelectedItem();
 //        String selectedLabel = items.get(selectedItem);
-        String atts = "1. "+ cnt_att1+"/"+w_at1+";" + newline;
+        String atts = "1. "+ cnt_att1+"/"+w_at1+";" + "&#10;";
+        sets_list.add(new Sets(w_at1, cnt_att1));
         if (null != cnt_att2 && null != w_at2){
-            atts = atts + "2. "+cnt_att2+"/"+w_at2+";"+ newline;
+            atts = atts + "2. "+cnt_att2+"/"+w_at2+";"+ "&#10;";
+            sets_list.add(new Sets(w_at2, cnt_att2));
         }
         if (null != cnt_att3 && null != w_at3){
-            atts = atts + "3. "+cnt_att3+"/"+w_at3+";"+ newline;
+            atts = atts + "3. "+cnt_att3+"/"+w_at3+";"+ "&#10;";
+            sets_list.add(new Sets(w_at3, cnt_att3));
         }
         if (null != cnt_att4 && null != w_at4){
-            atts = atts + "4. "+cnt_att4+"/"+w_at4+";"+ newline;
+            atts = atts + "4. "+cnt_att4+"/"+w_at4+";"+ "&#10;";
+            sets_list.add(new Sets(w_at4, cnt_att4));
         }
         if (null != cnt_att5 && null !=w_at5){
-            atts = atts + "5. "+cnt_att5+"/"+w_at5+";"+ newline;
+            atts = atts + "5. "+cnt_att5+"/"+w_at5+";"+ "&#10;";
+            sets_list.add(new Sets(w_at5, cnt_att5));
         }
         if (null != cnt_att6 && null !=w_at6){
-            atts = atts + "6. "+cnt_att6+"/"+w_at6+";"+ newline;
+            atts = atts + "6. "+cnt_att6+"/"+w_at6+";"+ "&#10;";
+            sets_list.add(new Sets(w_at6, cnt_att6));
         }
         if (null != cnt_att7 && null !=w_at7){
-            atts = atts + "7. "+cnt_att7+"/"+w_at7+";"+ newline;
+            atts = atts + "7. "+cnt_att7+"/"+w_at7+";"+ "&#10;";
+            sets_list.add(new Sets(w_at7, cnt_att7));
         }
+        
+        
+        
         curDiary.setMuscleGroup(selectedItemMuscleGr);
         curDiary.setTrainingType(selectedItemType);
         curDiary.setTasks(selectedItemTasks);
         curDiary.setOwner(usrMB.getCurrentUser());
         curDiary.setAttempts(atts);
         diaryService.create(curDiary);
+        
+        for (Sets set:sets_list){
+            set.setI_set(curDiary);
+            setsService.create(set);
+        }
 //        try {
         //FacesContext.getCurrentInstance().getExternalContext().redirect(".");
         FacesContext context = FacesContext.getCurrentInstance();
@@ -182,8 +214,13 @@ public class DiaryManagedBean {
     }
     
     public void editRecord(RowEditEvent event){
-        Diary updated = (Diary) event.getObject();
-        diaryService.edit(updated);
+        Diary updated_diary = (Diary) event.getObject();
+        
+        List<Sets> updated_sets = updated_diary.getSetsList();
+        for (Sets updated_set:updated_sets){
+            setsService.edit(updated_set);
+        }
+        diaryService.edit(updated_diary);
     }
 
     /**
@@ -741,4 +778,20 @@ public class DiaryManagedBean {
     public void setW_at7(String w_at7) {
         this.w_at7 = w_at7;
     }
+
+    /**
+     * @return the set_id
+     */
+    public String getSet_id() {
+        return set_id;
+    }
+
+    /**
+     * @param set_id the set_id to set
+     */
+    public void setSet_id(String set_id) {
+        this.set_id = set_id;
+    }
+
+    
 }

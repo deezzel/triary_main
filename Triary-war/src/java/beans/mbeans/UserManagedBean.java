@@ -187,7 +187,7 @@ public class UserManagedBean {
             if (session != null) {
                 session.invalidate();
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("/Triary-war/index.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("newinndex.xhtml");
 
                 } catch (IOException ex) {
                     Logger.getLogger(UserManagedBean.class.getName()).log(Level.SEVERE, null, ex);

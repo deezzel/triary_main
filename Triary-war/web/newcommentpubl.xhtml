@@ -124,16 +124,55 @@
                             <h1>
                                 Top 10 news
                             </h1>
+                            <h:form>
+                                <p:dataGrid value="#{publMB.lstTopNews}" var="topnews"  
+                                            rows="10" 
+                                            columns="1"
+                                            >
+                                    <li>
+                                    <h:outputLink  value="newcommentpubl.xhtml">
+                                        <f:param name="id_news" value="#{topnews.id}"/>
+                                        <h:outputText value="#{topnews.title}" style="font-family: 'Yanone Kaffeesatz';color:black; font-size:0.8em"/>
+                                    </h:outputLink>
+                                    </li>
+                                </p:dataGrid>
+                            </h:form>
                         </section>
                         <section>
                             <h1>
                                 Top 10 training methods
                             </h1>
+                            <h:form>
+                                <p:dataGrid value="#{publMB.lstTopTrMethods}" var="toptrmethods"  
+                                            rows="10" 
+                                            columns="1"
+                                            >
+                                    <li>
+                                    <h:outputLink  value="newcommentpubl.xhtml">
+                                        <f:param name="id_news" value="#{toptrmethods.id}"/>
+                                        <h:outputText value="#{toptrmethods.title}" style="font-family: 'Yanone Kaffeesatz';color:black; font-size:0.8em"/>
+                                    </h:outputLink>
+                                    </li>
+                                </p:dataGrid>
+                            </h:form>
                         </section>
                         <section>
                             <h1>
                                 Top 10 diets
                             </h1>
+                            <h:form>
+                                <p:dataGrid value="#{publMB.lstTopDiets}" var="topdiets"  
+                                            rows="10" 
+                                            columns="1"
+                                            >
+                                    <li>
+                                    <h:outputLink  value="newcommentpubl.xhtml">
+                                        <f:param name="id_news" value="#{topdiets.id}"/>
+                                        <h:outputText value="#{topdiets.title}" style="font-family: 'Yanone Kaffeesatz';color:black; font-size:0.8em"/>
+                                    </h:outputLink>
+                                    </li>
+                                </p:dataGrid>
+                            </h:form>
                         </section>
                     </div>
                 </div>

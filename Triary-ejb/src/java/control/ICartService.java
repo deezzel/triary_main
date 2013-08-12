@@ -6,6 +6,8 @@ package control;
 
 import java.util.List;
 import model.Cart;
+import model.Product;
+import model.Users;
 
 /**
  *
@@ -13,4 +15,7 @@ import model.Cart;
  */
 public interface ICartService {
     public List<Cart> getAll();
+    public List<Cart> getByStatusProducts(Users usr, String status);
+    public boolean addToCart(Product prod, Cart cart, Users usr, Integer count);
+    public String calculateTotalPrice(List<Cart> products);
 }
