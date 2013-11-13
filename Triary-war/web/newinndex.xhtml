@@ -13,7 +13,7 @@
         <meta name="description" content="" />
         <meta name="keywords" content="" />
         <!--5grid--><script src="css/5grid/viewport.js"></script><!--[if lt IE 9]><script src="css/5grid/ie.js"></script><![endif]--><link rel="stylesheet" href="css/5grid/responsive.css" /><!--/5grid-->
-        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style_1.css" />
         <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
         <!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
         <style type="text/css">
@@ -39,9 +39,18 @@
                     <nav>
                         <h:form id="form">                          
                             <c:if test="#{mainMB.currentPage=='index'}">
-                                <a style="color:red" href="newinndex.xhtml">Homepage</a>
+                                <a style="color:red;position:absolute; left: -270px" href="newinndex.xhtml">Homepage</a>
                             </c:if>
-                            <a href="newpublications.xhtml">Publications</a>
+                            <div id="publ_container">
+                                <div class="publications">
+                                    <div class="text" style="float:right"><a href="newpublications.xhtml">Publications</a></div>
+                                </div>
+                                <div id="publ_menu">
+                                    <div class="publ1"><a href="newpublications.xhtml">News</a></div>
+                                    <div class="publ2"><a href="newdiets.xhtml">Diets</a></div>
+                                    <div class="publ3"><a href="newtrmethods.xhtml">Training Methods</a></div>
+                                </div>
+                            </div>
                             
                             <c:if test="#{userManagedBean.currentUser==null}">
                                 <p:growl id="growl" showDetail="true" sticky="false" life="2000" />
